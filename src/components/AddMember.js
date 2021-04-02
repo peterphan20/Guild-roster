@@ -35,7 +35,7 @@ const AddMember = () => {
 		if (success[0]) {
 			return (
 				<div>
-					<h1>Congratulations! You have created a Member</h1>
+					<h1>Congratulations! You have created a Member 🦖</h1>
 					<p>User: {success[0].username}</p>
 					<p>Rank: {success[0].rank}</p>
 					<p>Class: {success[0].class}</p>
@@ -47,7 +47,7 @@ const AddMember = () => {
 			if (!error.details) return;
 			return (
 				<div>
-					<h1>Sorry, we could not create this member D:</h1>
+					<h1>Sorry, we could not create this member 😿</h1>
 					<p>{error.details[0].message}</p>
 				</div>
 			);
