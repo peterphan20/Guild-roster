@@ -3,6 +3,7 @@ import AddMember from "./components/AddMember";
 import EditMember from "./components/EditMember";
 import GuildList from "./components/GuildList";
 import styled from "styled-components";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
 	const [currentSelectedMember, setCurrentSelectedMember] = useState({});
@@ -13,25 +14,34 @@ const App = () => {
 
 	return (
 		<Container className="guild-roster-container">
-			<AddMember />
-			<EditMember
-				currentSelectedMember={currentSelectedMember}
-				editUsername={editUsername}
-				editRank={editRank}
-				editClassname={editClassname}
-				editRace={editRace}
-				setEditRank={setEditRank}
-				setEditClassname={setEditClassname}
-				setEditRace={setEditRace}
-				setEditUsername={setEditUsername}
-			/>
-			<GuildList
-				setCurrentSelectedMember={setCurrentSelectedMember}
-				setEditRank={setEditRank}
-				setEditClassname={setEditClassname}
-				setEditRace={setEditRace}
-				setEditUsername={setEditUsername}
-			/>
+			<Router>
+				<Switch>
+					<Route
+						path="/"
+						exact
+						component={GuildList}
+						setCurrentSelectedMember={setCurrentSelectedMember}
+						setEditRank={setEditRank}
+						setEditClassname={setEditClassname}
+						setEditRace={setEditRace}
+						setEditUsername={setEditUsername}
+					/>
+					<Route path="/addmember" component={AddMember} />
+					<Route
+						path="/editmember"
+						component={EditMember}
+						currentSelectedMember={currentSelectedMember}
+						editUsername={editUsername}
+						editRank={editRank}
+						editClassname={editClassname}
+						editRace={editRace}
+						setEditRank={setEditRank}
+						setEditClassname={setEditClassname}
+						setEditRace={setEditRace}
+						setEditUsername={setEditUsername}
+					/>
+				</Switch>
+			</Router>
 		</Container>
 	);
 };
@@ -53,16 +63,15 @@ const Container = styled.div`
 	}
 	button {
 		background-color: #fffae9;
-		padding: 3px 8px;
-		font-size: 18px;
+		font-size: 11px;
+		font-weight: 500;
+		padding: 2px 9px;
 		margin-left: 5px;
 		margin-right: 5px;
 		border-radius: 5px;
 		cursor: pointer;
-		opacity: 0;
-		transition: opacity 0.35s ease;
 	}
 	button:hover {
-
+		transform: scale(1.1);
 	}
 `;

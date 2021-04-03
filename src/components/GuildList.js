@@ -3,6 +3,7 @@ import Searchbar from "./Searchbar";
 import { fetchMembers, removeMember } from "../helpers/crudMembers";
 import styled from "styled-components";
 import { randomBytes } from "crypto";
+import { Link } from "react-router-dom";
 
 const GuildList = ({
 	setCurrentSelectedMember,
@@ -91,21 +92,23 @@ const GuildList = ({
 						<button onClick={(e) => handleClick(e.target.id)} id={user.id}>
 							Delete
 						</button>
-						<button
-							data-id={user.id}
-							data-username={user.username}
-							data-rank={user.rank}
-							data-class={user.class}
-							data-race={user.race}
-							onClick={(e) => handleEditClick(e)}
-						>
-							Edit
-						</button>
+						<Link to="/editmember">
+							<button
+								data-id={user.id}
+								data-username={user.username}
+								data-rank={user.rank}
+								data-class={user.class}
+								data-race={user.race}
+								onClick={(e) => handleEditClick(e)}
+							>
+								Edit
+							</button>
+						</Link>
 					</div>
 					<div className="member-icon">
-						<i className="fas fa-plus-circle"></i>
-						<i className="fas fa-shield-alt"></i>
-						<i className="fas fa-khanda"></i>
+						<i className="fas fa-plus-circle healer"></i>
+						<i className="fas fa-shield-alt tank"></i>
+						<i className="fas fa-khanda dps"></i>
 					</div>
 				</div>
 			</div>
@@ -124,20 +127,27 @@ export default GuildList;
 
 const MemberCard = styled.div`
 	.guild-member-card {
-		background-color: rgb(27, 27, 27);
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-		grid-gap: 10px;
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: auto;
+		grid-row-gap: 1em;
+		background-color: rgb(27, 27, 27);
+		border: 1px solid black;
+		box-shadow: 0 2px 5px 1px rgb(64 60 67 / 40%);
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%;
 	}
 	.member-content {
 		color: #fffae9;
 		text-align: center;
 		background-color: rgb(32, 32, 32);
 		border: 1px solid black;
+		margin-left: auto;
+		margin-right: auto;
 		padding: 10px;
-		width: 450px;
-		height: 300px;
-		opacity: 1;
+		width: 400px;
+		height: 280px;
 	}
 	.header {
 		display: flex;
@@ -169,7 +179,7 @@ const MemberCard = styled.div`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 30px;
+		margin-top: 18px;
 		margin-left: 10px;
 		margin-right: 10px;
 	}
@@ -181,5 +191,15 @@ const MemberCard = styled.div`
 		font-size: 16px;
 		margin-left: 3px;
 		margin-right: 3px;
+	}
+	.member-icon i:hover {
+		transform: scale(1.3);
+	}
+	.delete-edit-btn {
+		opacity: 0;
+		transition: opacity 0.35s ease;
+	}
+	.delete-edit-btn:hover {
+		opacity: 1;
 	}
 `;
