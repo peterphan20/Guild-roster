@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
 import { fetchMembers, removeMember } from "../helpers/crudMembers";
 import styled from "styled-components";
+import { randomBytes } from "crypto";
 
 const GuildList = ({
 	setCurrentSelectedMember,
@@ -10,9 +11,22 @@ const GuildList = ({
 	setEditRace,
 	setEditClassname,
 }) => {
-	const healers = ["priest", "shaman", "druid"]
-	const tanks = ["paladin", "deathknight", "monk"]
-	const dps = ["hunter", "rogue", "mage", "warlock", "demonhunter"]
+	const healers = ["druid", "monk", "paladin", "priest", "shaman"];
+	const tanks = ["deathknight", "demonhunter", "druid", "monk", "paladin", "warrior"];
+	const dps = [
+		"deathknight",
+		"demonhunter",
+		"druid",
+		"hunter",
+		"mage",
+		"monk",
+		"paladin",
+		"priest",
+		"rogue",
+		"shaman",
+		"warlock",
+		"warrior",
+	];
 
 	const [results, setResults] = useState([]);
 
@@ -52,11 +66,14 @@ const GuildList = ({
 	};
 
 	const renderedList = results.map((user) => {
+		const avatarHash = randomBytes(20).toString("hex");
 		return (
 			<div key={user.id} className="member-content">
 				<div className="header">
 					<div className="avatar">
-						<img src="https://avatars.dicebear.com/api/avataaars/qwer.svg?r=50&m=12&b=%23ff9118&w=120&h=120&eyes[]=happy&mouth[]=smile"></img>
+						<img
+							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%23ff9015&w=110&h=110`}
+						></img>
 					</div>
 					<div className="member-info">
 						<h1>{user.username}</h1>
@@ -120,12 +137,14 @@ const MemberCard = styled.div`
 		padding: 10px;
 		width: 450px;
 		height: 300px;
+		opacity: 1;
 	}
 	.header {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		text-align: left;
+		margin-top: 10px;
 	}
 	.member-info {
 		margin-left: 25px;
@@ -150,9 +169,17 @@ const MemberCard = styled.div`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 20px;
+		margin-top: 30px;
 		margin-left: 10px;
 		margin-right: 10px;
 	}
-
+	.member-footer p {
+		font-size: 12px;
+		font-weight: 300;
+	}
+	.member-icon i {
+		font-size: 16px;
+		margin-left: 3px;
+		margin-right: 3px;
+	}
 `;

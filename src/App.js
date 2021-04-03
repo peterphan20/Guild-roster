@@ -52,8 +52,17 @@ const Container = styled.div`
 		margin: 5px;
 	}
 	button {
-		padding: 10px;
+		background-color: #fffae9;
+		padding: 3px 8px;
 		font-size: 18px;
-		margin: 5px;
+		margin-left: 5px;
+		margin-right: 5px;
+		border-radius: 5px;
+		cursor: pointer;
+		opacity: 0;
+		transition: opacity 0.35s ease;
+	}
+	button:hover {
+
 	}
 `;

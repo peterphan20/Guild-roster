@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { postMember } from "../helpers/crudMembers";
+import styled from 'styled-components'
 
 const AddMember = () => {
 	const [username, setUsername] = useState("");
@@ -55,7 +56,7 @@ const AddMember = () => {
 	};
 
 	return (
-		<div className="add-member-form">
+		<AddContainer className="add-member-form">
 			<h1>Add Member</h1>
 			<br />
 			<input
@@ -94,8 +95,12 @@ const AddMember = () => {
 				Submit
 			</button>
 			{renderResponse()}
-		</div>
+		</AddContainer>
 	);
 };
 
 export default AddMember;
+
+const AddContainer = styled.div`
+	background-color: rgb(27, 27, 27);
+`;

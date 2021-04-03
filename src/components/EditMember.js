@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { putMember } from "../helpers/crudMembers";
+import styled from "styled-components";
 
 const EditMember = (props) => {
 	const [editResponse, setEditResponse] = useState("");
@@ -23,7 +24,7 @@ const EditMember = (props) => {
 	};
 
 	return (
-		<div>
+		<EditContainer>
 			<h1>Edit Member</h1>
 			<input
 				type="text"
@@ -51,8 +52,12 @@ const EditMember = (props) => {
 			<br />
 			<button onClick={onEditSubmit}>Submit</button>
 			<h2>{editResponse}</h2>
-		</div>
+		</EditContainer>
 	);
 };
 
 export default EditMember;
+
+const EditContainer = styled.div`
+	background-color: rgb(27, 27, 27);
+`;
