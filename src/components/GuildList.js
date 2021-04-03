@@ -9,25 +9,25 @@ const GuildList = ({
 	setCurrentSelectedMember,
 	setEditUsername,
 	setEditRank,
-	setEditRace,
 	setEditClassname,
+	setEditRace,
 }) => {
-	const healers = ["druid", "monk", "paladin", "priest", "shaman"];
-	const tanks = ["deathknight", "demonhunter", "druid", "monk", "paladin", "warrior"];
-	const dps = [
-		"deathknight",
-		"demonhunter",
-		"druid",
-		"hunter",
-		"mage",
-		"monk",
-		"paladin",
-		"priest",
-		"rogue",
-		"shaman",
-		"warlock",
-		"warrior",
-	];
+	// const healers = ["druid", "monk", "paladin", "priest", "shaman"];
+	// const tanks = ["deathknight", "demonhunter", "druid", "monk", "paladin", "warrior"];
+	// const dps = [
+	// 	"deathknight",
+	// 	"demonhunter",
+	// 	"druid",
+	// 	"hunter",
+	// 	"mage",
+	// 	"monk",
+	// 	"paladin",
+	// 	"priest",
+	// 	"rogue",
+	// 	"shaman",
+	// 	"warlock",
+	// 	"warrior",
+	// ];
 
 	const [results, setResults] = useState([]);
 
@@ -44,17 +44,19 @@ const GuildList = ({
 	};
 
 	const handleEditClick = (e) => {
+		console.log(e);
 		let dataArr = Array.from(e.target.attributes);
+		console.log(dataArr);
 		let memberId = dataArr[0].value;
 		let username = dataArr[1].value;
 		let rank = dataArr[2].value;
 		let classname = dataArr[3].value;
 		let race = dataArr[4].value;
 
-		setEditRace(race);
-		setEditClassname(classname);
-		setEditRank(rank);
 		setEditUsername(username);
+		setEditRank(rank);
+		setEditClassname(classname);
+		setEditRace(race);
 
 		window.scrollTo(0, 0);
 		setCurrentSelectedMember({
@@ -74,6 +76,7 @@ const GuildList = ({
 					<div className="avatar">
 						<img
 							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%23ff9015&w=110&h=110`}
+							alt="randomly generated avatar"
 						></img>
 					</div>
 					<div className="member-info">

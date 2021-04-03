@@ -16,30 +16,29 @@ const App = () => {
 		<Container className="guild-roster-container">
 			<Router>
 				<Switch>
-					<Route
-						path="/"
-						exact
-						component={GuildList}
-						setCurrentSelectedMember={setCurrentSelectedMember}
-						setEditRank={setEditRank}
-						setEditClassname={setEditClassname}
-						setEditRace={setEditRace}
-						setEditUsername={setEditUsername}
-					/>
+					<Route path="/" exact>
+						<GuildList
+							setCurrentSelectedMember={setCurrentSelectedMember}
+							setEditRank={setEditRank}
+							setEditClassname={setEditClassname}
+							setEditRace={setEditRace}
+							setEditUsername={setEditUsername}
+						/>
+					</Route>
 					<Route path="/addmember" component={AddMember} />
-					<Route
-						path="/editmember"
-						component={EditMember}
-						currentSelectedMember={currentSelectedMember}
-						editUsername={editUsername}
-						editRank={editRank}
-						editClassname={editClassname}
-						editRace={editRace}
-						setEditRank={setEditRank}
-						setEditClassname={setEditClassname}
-						setEditRace={setEditRace}
-						setEditUsername={setEditUsername}
-					/>
+					<Route path="/editmember">
+						<EditMember
+							currentSelectedMember={currentSelectedMember}
+							editUsername={editUsername}
+							editRank={editRank}
+							editClassname={editClassname}
+							editRace={editRace}
+							setEditRank={setEditRank}
+							setEditClassname={setEditClassname}
+							setEditRace={setEditRace}
+							setEditUsername={setEditUsername}
+						/>
+					</Route>
 				</Switch>
 			</Router>
 		</Container>
