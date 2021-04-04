@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Searchbar from "./Searchbar";
 import { fetchMembers, removeMember } from "../helpers/crudMembers";
 import styled from "styled-components";
 import { randomBytes } from "crypto";
@@ -29,6 +28,7 @@ const GuildList = ({
 	// 	"warrior",
 	// ];
 
+	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
 
 	useEffect(() => {
@@ -44,9 +44,7 @@ const GuildList = ({
 	};
 
 	const handleEditClick = (e) => {
-		console.log(e);
 		let dataArr = Array.from(e.target.attributes);
-		console.log(dataArr);
 		let memberId = dataArr[0].value;
 		let username = dataArr[1].value;
 		let rank = dataArr[2].value;
@@ -68,59 +66,81 @@ const GuildList = ({
 		});
 	};
 
-	const renderedList = results.map((user) => {
-		const avatarHash = randomBytes(20).toString("hex");
-		return (
-			<div key={user.id} className="member-content">
-				<div className="header">
-					<div className="avatar">
-						<img
-							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%23ff9015&w=110&h=110`}
-							alt="randomly generated avatar"
-						></img>
+	const renderedList = results
+		.filter((card) => {
+			if (term === "") {
+				return card;
+			} else if (
+				card.username.toLowerCase().includes(term.toLowerCase()) ||
+				card.rank.toLowerCase().includes(term.toLowerCase()) ||
+				card.classname.toLowerCase().includes(term.toLowerCase()) ||
+				card.race.toLowerCase().includes(term.toLowerCase())
+			) {
+				return card;
+			}
+		})
+		.sort((a, b) => a.username - b.username)
+		.map((user) => {
+			const avatarHash = randomBytes(20).toString("hex");
+			return (
+				<div key={user.id} className="member-content">
+					<div className="header">
+						<div className="avatar">
+							<img
+								src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%23ff9015&w=110&h=110`}
+								alt="randomly generated avatar"
+							></img>
+						</div>
+						<div className="member-info">
+							<h1>{user.username}</h1>
+							<h2>{user.rank}</h2>
+						</div>
 					</div>
-					<div className="member-info">
-						<h1>{user.username}</h1>
-						<h2>{user.rank}</h2>
+					<div className="member-class-race">
+						<h3>{user.classname}</h3>
+						<h5>{user.race}</h5>
 					</div>
-				</div>
-				<div className="member-class-race">
-					<h3>{user.classname}</h3>
-					<h5>{user.race}</h5>
-				</div>
-
-				<div className="member-footer">
-					<p>{new Date(user.joined).toLocaleDateString("en-US")}</p>
-					<div className="delete-edit-btn">
-						<button onClick={(e) => handleClick(e.target.id)} id={user.id}>
-							Delete
-						</button>
-						<Link to="/editmember">
-							<button
-								data-id={user.id}
-								data-username={user.username}
-								data-rank={user.rank}
-								data-class={user.class}
-								data-race={user.race}
-								onClick={(e) => handleEditClick(e)}
-							>
-								Edit
+					<div className="member-footer">
+						<p>{new Date(user.joined).toLocaleDateString("en-US")}</p>
+						<div className="delete-edit-btn">
+							<button className="guild-btn" onClick={(e) => handleClick(e.target.id)} id={user.id}>
+								Delete
 							</button>
-						</Link>
-					</div>
-					<div className="member-icon">
-						<i className="fas fa-plus-circle healer"></i>
-						<i className="fas fa-shield-alt tank"></i>
-						<i className="fas fa-khanda dps"></i>
+							<Link to="/editmember">
+								<button
+									data-id={user.id}
+									data-username={user.username}
+									data-rank={user.rank}
+									data-class={user.classname}
+									data-race={user.race}
+									onClick={(e) => handleEditClick(e)}
+									className="guild-btn"
+								>
+									Edit
+								</button>
+							</Link>
+						</div>
+						<div className="member-icon">
+							<i className="fas fa-plus-circle healer"></i>
+							<i className="fas fa-shield-alt tank"></i>
+							<i className="fas fa-khanda dps"></i>
+						</div>
 					</div>
 				</div>
-			</div>
-		);
-	});
+			);
+		});
 
 	return (
 		<MemberCard className="form-ui">
-			<Searchbar />
+			<div className="searchbar">
+				<h1>Search</h1>
+				<input
+					type="text"
+					placeholder="Search"
+					value={term}
+					onChange={(e) => setTerm(e.target.value)}
+				/>
+			</div>
 			<div className="guild-member-card">{renderedList}</div>
 		</MemberCard>
 	);
@@ -129,17 +149,29 @@ const GuildList = ({
 export default GuildList;
 
 const MemberCard = styled.div`
+	.guild-btn {
+		background-color: #fffae9;
+		font-size: 11px;
+		font-weight: 500;
+		padding: 2px 9px;
+		margin-left: 5px;
+		margin-right: 5px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.guild-btn:hover {
+		transform: scale(1.1);
+	}
 	.guild-member-card {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-auto-rows: auto;
-		grid-row-gap: 1em;
+		grid-gap: 0.5em;
 		background-color: rgb(27, 27, 27);
 		border: 1px solid black;
 		box-shadow: 0 2px 5px 1px rgb(64 60 67 / 40%);
 		margin-left: auto;
 		margin-right: auto;
-		width: 70%;
+		width: 80%;
 	}
 	.member-content {
 		color: #fffae9;
@@ -149,7 +181,7 @@ const MemberCard = styled.div`
 		margin-left: auto;
 		margin-right: auto;
 		padding: 10px;
-		width: 400px;
+		width: 380px;
 		height: 280px;
 	}
 	.header {
@@ -160,7 +192,7 @@ const MemberCard = styled.div`
 		margin-top: 10px;
 	}
 	.member-info {
-		margin-left: 25px;
+		margin-left: 15px;
 	}
 	.member-info h2 {
 		font-size: 1.5em;

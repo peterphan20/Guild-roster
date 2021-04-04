@@ -55,22 +55,4 @@ const Container = styled.div`
 		padding: 0px;
 		box-sizing: border-box;
 	}
-	input {
-		padding: 10px;
-		font-size: 18px;
-		margin: 5px;
-	}
-	button {
-		background-color: #fffae9;
-		font-size: 11px;
-		font-weight: 500;
-		padding: 2px 9px;
-		margin-left: 5px;
-		margin-right: 5px;
-		border-radius: 5px;
-		cursor: pointer;
-	}
-	button:hover {
-		transform: scale(1.1);
-	}
 `;
