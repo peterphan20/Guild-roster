@@ -3,6 +3,7 @@ import { fetchMembers, removeMember } from "../helpers/crudMembers";
 import styled from "styled-components";
 import { randomBytes } from "crypto";
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 const GuildList = ({
 	setCurrentSelectedMember,
@@ -77,9 +78,8 @@ const GuildList = ({
 				card.race.toLowerCase().includes(term.toLowerCase())
 			) {
 				return card;
-			}
+			} 
 		})
-		.sort((a, b) => a.username - b.username)
 		.map((user) => {
 			const avatarHash = randomBytes(20).toString("hex");
 			return (
@@ -132,14 +132,17 @@ const GuildList = ({
 
 	return (
 		<MemberCard className="form-ui">
-			<div className="searchbar">
-				<h1>Search</h1>
-				<input
-					type="text"
-					placeholder="Search"
-					value={term}
-					onChange={(e) => setTerm(e.target.value)}
-				/>
+			<div className="navbar">
+				<div className="searchbar">
+					<input
+						className="guild-search"
+						type="text"
+						placeholder="Search"
+						value={term}
+						onChange={(e) => setTerm(e.target.value)}
+					/>
+				</div>
+				<Nav />
 			</div>
 			<div className="guild-member-card">{renderedList}</div>
 		</MemberCard>
@@ -149,18 +152,24 @@ const GuildList = ({
 export default GuildList;
 
 const MemberCard = styled.div`
-	.guild-btn {
-		background-color: #fffae9;
-		font-size: 11px;
-		font-weight: 500;
-		padding: 2px 9px;
-		margin-left: 5px;
-		margin-right: 5px;
-		border-radius: 5px;
-		cursor: pointer;
+	.navbar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #1a1a1a;
+		margin-top: 0;
+		margin-bottom: 30px;
+		width: 100%;
+		height: 7vh;
 	}
-	.guild-btn:hover {
-		transform: scale(1.1);
+	.searchbar {
+		width: 100%;
+	}
+	.guild-search {
+		padding: 5px;
+		margin-left: 42%;
+		margin-right: 50%;
+		width: 450px;
 	}
 	.guild-member-card {
 		display: grid;
@@ -171,6 +180,7 @@ const MemberCard = styled.div`
 		box-shadow: 0 2px 5px 1px rgb(64 60 67 / 40%);
 		margin-left: auto;
 		margin-right: auto;
+		padding: 10px;
 		width: 80%;
 	}
 	.member-content {
@@ -236,5 +246,18 @@ const MemberCard = styled.div`
 	}
 	.delete-edit-btn:hover {
 		opacity: 1;
+	}
+	.guild-btn {
+		background-color: #fffae9;
+		font-size: 11px;
+		font-weight: 500;
+		padding: 2px 9px;
+		margin-left: 5px;
+		margin-right: 5px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.guild-btn:hover {
+		transform: scale(1.1);
 	}
 `;
