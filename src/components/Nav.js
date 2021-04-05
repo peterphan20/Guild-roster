@@ -11,10 +11,10 @@ const Nav = () => {
 						<Link to="/addmember">Add Member</Link>
 					</li>
 					<li className="nav-link">
-						<Link>Log In</Link>
+						<Link to="/login">Log In</Link>
 					</li>
 					<li className="nav-link">
-						<Link>Sign Up</Link>
+						<Link to="/signup">Sign Up</Link>
 					</li>
 				</ol>
 			</nav>

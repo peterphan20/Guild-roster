@@ -70,15 +70,16 @@ const GuildList = ({
 	const renderedList = results
 		.filter((card) => {
 			if (term === "") {
-				return card;
+				return true;
 			} else if (
 				card.username.toLowerCase().includes(term.toLowerCase()) ||
 				card.rank.toLowerCase().includes(term.toLowerCase()) ||
 				card.classname.toLowerCase().includes(term.toLowerCase()) ||
 				card.race.toLowerCase().includes(term.toLowerCase())
 			) {
-				return card;
+				return true;
 			}
+			return true;
 		})
 		.map((user) => {
 			const avatarHash = randomBytes(20).toString("hex");
@@ -152,6 +153,9 @@ const GuildList = ({
 export default GuildList;
 
 const MemberCard = styled.div`
+	body {
+		background-color: #121212;
+	}
 	.navbar {
 		display: flex;
 		justify-content: space-between;

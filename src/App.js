@@ -3,8 +3,9 @@ import AddMember from "./components/AddMember";
 import EditMember from "./components/EditMember";
 import GuildList from "./components/GuildList";
 import styled from "styled-components";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
 	const [currentSelectedMember, setCurrentSelectedMember] = useState({});
@@ -12,6 +13,7 @@ const App = () => {
 	const [editRank, setEditRank] = useState("");
 	const [editClassname, setEditClassname] = useState("");
 	const [editRace, setEditRace] = useState("");
+	const [auth, setAuth] = useState({});
 
 	return (
 		<Container className="guild-roster-container">
@@ -41,6 +43,9 @@ const App = () => {
 						/>
 					</Route>
 					<Route path="/signup" component={SignUp} />
+					<Route path="/login">
+						<Login auth={auth} setAuth={setAuth} />
+					</Route>
 				</Switch>
 			</Router>
 		</Container>
@@ -56,5 +61,7 @@ const Container = styled.div`
 		margin: 0px;
 		padding: 0px;
 		box-sizing: border-box;
+	}
+	body {
 	}
 `;
