@@ -78,7 +78,7 @@ const GuildList = ({
 				card.race.toLowerCase().includes(term.toLowerCase())
 			) {
 				return card;
-			} 
+			}
 		})
 		.map((user) => {
 			const avatarHash = randomBytes(20).toString("hex");

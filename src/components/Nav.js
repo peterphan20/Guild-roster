@@ -31,9 +31,9 @@ const MenuBar = styled.div`
 		align-items: center;
 	}
 	a {
-    font-size: 13px;
-		text-decoration: none;		
-    color: rgb(255, 144, 21);
+		font-size: 13px;
+		text-decoration: none;
+		color: rgb(255, 144, 21);
 	}
 	.nav-link {
 		list-style: none;

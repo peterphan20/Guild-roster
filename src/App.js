@@ -4,7 +4,6 @@ import EditMember from "./components/EditMember";
 import GuildList from "./components/GuildList";
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Nav from "./components/Nav";
 import SignUp from "./components/SignUp";
 
 const App = () => {
