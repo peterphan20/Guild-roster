@@ -12,23 +12,6 @@ const GuildList = ({
 	setEditClassname,
 	setEditRace,
 }) => {
-	// const healers = ["druid", "monk", "paladin", "priest", "shaman"];
-	// const tanks = ["deathknight", "demonhunter", "druid", "monk", "paladin", "warrior"];
-	// const dps = [
-	// 	"deathknight",
-	// 	"demonhunter",
-	// 	"druid",
-	// 	"hunter",
-	// 	"mage",
-	// 	"monk",
-	// 	"paladin",
-	// 	"priest",
-	// 	"rogue",
-	// 	"shaman",
-	// 	"warlock",
-	// 	"warrior",
-	// ];
-
 	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
 
@@ -79,7 +62,7 @@ const GuildList = ({
 			) {
 				return true;
 			}
-			return true;
+			return false;
 		})
 		.map((user) => {
 			const avatarHash = randomBytes(20).toString("hex");
@@ -153,11 +136,14 @@ const GuildList = ({
 export default GuildList;
 
 const MemberFormUi = styled.div`
+	background-color: #121212;
 	display: grid;
 	place-items: center;
-	background-color: #121212;
+	min-height: 100%;
+	min-width: 100%;
 `;
 const Navbar = styled.div`
+	position: fixed;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -187,6 +173,8 @@ const GuildCardContainer = styled.div`
 	background-color: rgb(27, 27, 27);
 	box-shadow: 0 2px 5px 1px rgb(64 60 67 / 40%);
 	padding: 5px;
+	margin-top: 60px;
+	margin-bottom: 40px;
 	width: 50%;
 `;
 const MemberCard = styled.div`

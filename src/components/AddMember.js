@@ -101,7 +101,10 @@ const AddMember = () => {
 export default AddMember;
 
 const AddContainer = styled.div`
-	h1 {
+	background-color: blue;
+	height: 100%;
+`;
+/* h1 {
 		background-color: rgb(32, 32, 32);
 		color: rgb(255, 144, 21);
 		text-align: center;
@@ -180,5 +183,4 @@ const AddContainer = styled.div`
 	}
 	.success-msg {
 		font-size: 9px;
-	}
-`;
+	} */

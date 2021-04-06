@@ -16,7 +16,7 @@ const App = () => {
 	const [auth, setAuth] = useState({});
 
 	return (
-		<Container className="guild-roster-container">
+		<Container>
 			<Router>
 				<Switch>
 					<Route path="/" exact>
@@ -55,4 +55,6 @@ const App = () => {
 export default App;
 
 const Container = styled.div`
+	width: 100%;
+	height: 100vh;
 `;
