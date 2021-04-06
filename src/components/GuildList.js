@@ -163,7 +163,7 @@ const Searchbar = styled.div`
 		border: none;
 		border-radius: 6px;
 		padding: 3px 150px 3px 5px;
-		margin-left: 15rem;
+		margin-left: 14rem;
 	}
 `;
 const GuildCardContainer = styled.div`
