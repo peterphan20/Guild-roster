@@ -84,11 +84,11 @@ const GuildList = ({
 		.map((user) => {
 			const avatarHash = randomBytes(20).toString("hex");
 			return (
-				<div key={user.id} className="member-content">
-					<div className="header">
+				<MemberCard key={user.id}>
+					<HeaderCard>
 						<div className="avatar">
 							<img
-								src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%23ff9015&w=110&h=110`}
+								src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%23ff9015&w=60&h=60`}
 								alt="randomly generated avatar"
 							></img>
 						</div>
@@ -96,19 +96,19 @@ const GuildList = ({
 							<h1>{user.username}</h1>
 							<h2>{user.rank}</h2>
 						</div>
-					</div>
-					<div className="member-class-race">
+					</HeaderCard>
+					<CharacterDescription className="member-class-race">
 						<h3>{user.classname}</h3>
 						<h5>{user.race}</h5>
-					</div>
-					<div className="member-footer">
-						<p>{new Date(user.joined).toLocaleDateString("en-US")}</p>
-						<div className="delete-edit-btn">
-							<button className="guild-btn" onClick={(e) => handleClick(e.target.id)} id={user.id}>
+					</CharacterDescription>
+					<CardFooter>
+						<DateJoined>{new Date(user.joined).toLocaleDateString("en-US")}</DateJoined>
+						<DeleteEditBtn>
+							<DeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
 								Delete
-							</button>
+							</DeleteBtn>
 							<Link to="/editmember">
-								<button
+								<EditBtn
 									data-id={user.id}
 									data-username={user.username}
 									data-rank={user.rank}
@@ -118,23 +118,23 @@ const GuildList = ({
 									className="guild-btn"
 								>
 									Edit
-								</button>
+								</EditBtn>
 							</Link>
-						</div>
-						<div className="member-icon">
+						</DeleteEditBtn>
+						<FooterIcon className="member-icon">
 							<i className="fas fa-plus-circle healer"></i>
 							<i className="fas fa-shield-alt tank"></i>
 							<i className="fas fa-khanda dps"></i>
-						</div>
-					</div>
-				</div>
+						</FooterIcon>
+					</CardFooter>
+				</MemberCard>
 			);
 		});
 
 	return (
-		<MemberCard className="form-ui">
-			<div className="navbar">
-				<div className="searchbar">
+		<MemberFormUi>
+			<Navbar>
+				<Searchbar>
 					<input
 						className="guild-search"
 						type="text"
@@ -142,76 +142,170 @@ const GuildList = ({
 						value={term}
 						onChange={(e) => setTerm(e.target.value)}
 					/>
-				</div>
+				</Searchbar>
 				<Nav />
-			</div>
-			<div className="guild-member-card">{renderedList}</div>
-		</MemberCard>
+			</Navbar>
+			<GuildCardContainer>{renderedList}</GuildCardContainer>
+		</MemberFormUi>
 	);
 };
 
 export default GuildList;
 
+const MemberFormUi = styled.div`
+	display: grid;
+	place-items: center;
+	background-color: #121212;
+`;
+const Navbar = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #1a1a1a;
+	margin-top: 0;
+	margin-bottom: 30px;
+	width: 100%;
+	height: 2.6rem;
+`;
+const Searchbar = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+
+	input {
+		border: none;
+		border-radius: 6px;
+		padding: 3px 150px 3px 5px;
+		margin-left: 15rem;
+	}
+`;
+const GuildCardContainer = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-gap: 0.5em;
+	background-color: rgb(27, 27, 27);
+	box-shadow: 0 2px 5px 1px rgb(64 60 67 / 40%);
+	padding: 5px;
+	width: 50%;
+`;
 const MemberCard = styled.div`
-	body {
-		background-color: #121212;
+	background-color: rgb(32, 32, 32);
+	color: #fffae9;
+	border: 1px solid rgb(24, 24, 24);
+	padding-top: 5px;
+	padding-left: 9px;
+	width: 263px;
+	height: 150px;
+`;
+const HeaderCard = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	h1,
+	h2 {
+		margin-left: 18px;
 	}
-	.navbar {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		background-color: #1a1a1a;
-		margin-top: 0;
-		margin-bottom: 30px;
-		width: 100%;
-		height: 7vh;
+	h1 {
+		font-size: 20px;
+		font-weight: 700;
 	}
-	.searchbar {
-		width: 100%;
+	h2 {
+		color: rgb(255, 144, 21);
+		font-size: 18px;
+		font-weight: 600;
+		padding-bottom: 10px;
 	}
-	.guild-search {
-		padding: 5px;
-		margin-left: 42%;
-		margin-right: 50%;
-		width: 450px;
+`;
+const CharacterDescription = styled.div`
+	h3 {
+		font-size: 12px;
+		font-weight: 500;
 	}
+	h5 {
+		font-size: 9px;
+		font-weight: 400;
+	}
+`;
+const CardFooter = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 18px;
+`;
+const DateJoined = styled.p`
+	font-size: 7px;
+`;
+const FooterIcon = styled.div`
+	font-size: 12px;
+	margin-right: 5px;
+
+	i {
+		margin-left: 2px;
+		margin-right: 2px;
+		cursor: pointer;
+	}
+	i:hover {
+		transition: 0.2s ease;
+		transform: scale(1.3);
+	}
+`;
+const DeleteEditBtn = styled.div`
+	opacity: 0;
+	transition: opacity 0.35s ease;
+	&:hover {
+		opacity: 1;
+	}
+`;
+const DeleteBtn = styled.button`
+	background-color: rgb(255, 144, 21);
+	font-size: 8px;
+	font-weight: 500;
+	border: 1px solid darkslategray;
+	border-radius: 10px;
+	padding: 2.5px 9px;
+	margin-right: 1.5px;
+	cursor: pointer;
+	&:hover {
+		transition: 0.2s ease;
+		transform: scale(1.1);
+	}
+`;
+const EditBtn = styled.button`
+	background-color: rgb(255, 144, 21);
+	font-size: 8px;
+	font-weight: 500;
+	border: 1px solid darkslategray;
+	border-radius: 10px;
+	padding: 2.5px 9px;
+	margin-left: 1.5px;
+	cursor: pointer;
+	&:hover {
+		transition: 0.2s ease;
+		transform: scale(1.1);
+	}
+`;
+/*
+
 	.guild-member-card {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 0.5em;
-		background-color: rgb(27, 27, 27);
-		border: 1px solid black;
-		box-shadow: 0 2px 5px 1px rgb(64 60 67 / 40%);
+
+
 		margin-left: auto;
 		margin-right: auto;
 		padding: 10px;
 		width: 80%;
+		overflow-x: hidden;
 	}
-	.member-content {
-		color: #fffae9;
-		text-align: center;
-		background-color: rgb(32, 32, 32);
-		border: 1px solid black;
-		margin-left: auto;
-		margin-right: auto;
-		padding: 10px;
-		width: 380px;
-		height: 280px;
-	}
-	.header {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		text-align: left;
-		margin-top: 10px;
-	}
+
+
 	.member-info {
 		margin-left: 15px;
 	}
 	.member-info h2 {
 		font-size: 1.5em;
 		font-weight: 500;
-		color: rgb(255, 144, 21);
+
 	}
 	.member-class-race {
 		text-align: left;
@@ -241,27 +335,4 @@ const MemberCard = styled.div`
 		margin-left: 3px;
 		margin-right: 3px;
 	}
-	.member-icon i:hover {
-		transform: scale(1.3);
-	}
-	.delete-edit-btn {
-		opacity: 0;
-		transition: opacity 0.35s ease;
-	}
-	.delete-edit-btn:hover {
-		opacity: 1;
-	}
-	.guild-btn {
-		background-color: #fffae9;
-		font-size: 11px;
-		font-weight: 500;
-		padding: 2px 9px;
-		margin-left: 5px;
-		margin-right: 5px;
-		border-radius: 5px;
-		cursor: pointer;
-	}
-	.guild-btn:hover {
-		transform: scale(1.1);
-	}
-`;
+*/

@@ -55,13 +55,4 @@ const App = () => {
 export default App;
 
 const Container = styled.div`
-	* {
-		scroll-behavior: smooth;
-		font-family: "Poppins", sans-serif;
-		margin: 0px;
-		padding: 0px;
-		box-sizing: border-box;
-	}
-	body {
-	}
 `;

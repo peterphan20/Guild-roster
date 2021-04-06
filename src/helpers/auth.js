@@ -1,6 +1,6 @@
 const CONTENT_TYPE_JSON = { "Content-Type": "application/json; charset=UTF-8" };
 
-export const fetchAuthToken = async (username, password, cb) => {
+export const fetchAuthToken = async (username, password) => {
 	const response = await fetch("https://api-guildroster.herokuapp.com/auth/jwt/login", {
 		method: "POST",
 		body: JSON.stringify({
