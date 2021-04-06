@@ -20,11 +20,15 @@ const GuildList = ({
 	}, []);
 
 	const handleClick = (id) => {
+		const testToken = localStorage.getItem("jwtToken");
+		if (!testToken) {
+			return;
+		}
 		const idArr = [...results].filter((user) => {
 			return Number(user.id) !== Number(id);
 		});
 		setResults(idArr);
-		removeMember(id);
+		removeMember(id, JSON.parse(testToken).token);
 	};
 
 	const handleEditClick = (e) => {
@@ -274,53 +278,3 @@ const EditBtn = styled.button`
 		transform: scale(1.1);
 	}
 `;
-/*
-
-	.guild-member-card {
-
-
-		margin-left: auto;
-		margin-right: auto;
-		padding: 10px;
-		width: 80%;
-		overflow-x: hidden;
-	}
-
-
-	.member-info {
-		margin-left: 15px;
-	}
-	.member-info h2 {
-		font-size: 1.5em;
-		font-weight: 500;
-
-	}
-	.member-class-race {
-		text-align: left;
-		margin-top: 15px;
-		margin-left: 10px;
-	}
-	.member-class-race h3 {
-		font-size: 1.6em;
-	}
-	.member-class-race h5 {
-		font-size: 1em;
-	}
-	.member-footer {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-top: 18px;
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-	.member-footer p {
-		font-size: 12px;
-		font-weight: 300;
-	}
-	.member-icon i {
-		font-size: 16px;
-		margin-left: 3px;
-		margin-right: 3px;
-	}
-*/

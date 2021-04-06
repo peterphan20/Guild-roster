@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { fetchAuthToken, testAuth } from "../helpers/auth";
+import { fetchAuthToken } from "../helpers/auth";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 const Login = ({ auth, setAuth }) => {
 	const [username, setUsername] = useState("");
@@ -13,25 +14,14 @@ const Login = ({ auth, setAuth }) => {
 			return;
 		}
 		localStorage.setItem("jwtToken", JSON.stringify(response));
+		console.log("token is generated");
 		setAuth(response);
-	};
-
-	const handleAuthCheck = async () => {
-		const testToken = localStorage.getItem("jwtToken");
-		if (!testToken) {
-			console.log("you is not signed in");
-			return;
-		}
-		const response = await testAuth(JSON.parse(testToken).token);
-		console.log(response);
 	};
 
 	const handleLogout = () => {
 		setAuth({});
 		localStorage.removeItem("jwtToken");
 	};
-	// check if authenticated/jwt/test
-	// handle logout
 
 	return (
 		<LoginContainer>
@@ -75,8 +65,7 @@ const Login = ({ auth, setAuth }) => {
 							?
 						</p>
 						<button onClick={handleLoginAuth}>Log In</button>
-						<button onClick={handleAuthCheck}>Check Auth</button>
-						<button onClick={handleLogout}>Log Out</button>
+						<button onClick={handleLogout}></button>
 						<p>{auth.username ? "you is signed in" : "you is signed out"}</p>
 					</div>
 				</div>

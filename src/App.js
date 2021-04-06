@@ -15,6 +15,7 @@ const App = () => {
 	const [editRace, setEditRace] = useState("");
 	const [auth, setAuth] = useState({});
 
+
 	return (
 		<Container>
 			<Router>
@@ -28,7 +29,9 @@ const App = () => {
 							setEditUsername={setEditUsername}
 						/>
 					</Route>
-					<Route path="/addmember" component={AddMember} />
+					<Route path="/addmember">
+						<AddMember auth={auth} setAuth={auth} />
+					</Route>
 					<Route path="/editmember">
 						<EditMember
 							currentSelectedMember={currentSelectedMember}

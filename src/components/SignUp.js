@@ -5,18 +5,18 @@ import styled from "styled-components";
 const SignUp = () => {
 	return (
 		<TableContainer className="signup-container">
-			<div class="center">
+			<div className="center">
 				<table>
 					<thread>
 						<tr>
 							<td style={{ width: "33.33%" }}>
-								<div class="dash"></div>
+								<div className="dash"></div>
 							</td>
 							<td style={{ padding: "0 6px" }}>
 								<h1>Register</h1>
 							</td>
 							<td style={{ width: "33.33%" }}>
-								<div class="dash"></div>
+								<div className="dash"></div>
 							</td>
 						</tr>
 						<tr>
@@ -58,9 +58,9 @@ const SignUp = () => {
 					</tr>
 					<tr>
 						<td colspan="3">
-							<div class="terms">
+							<div className="terms">
 								<input id="checkid2" type="checkbox" value="test" />{" "}
-								<label for="checkid2">
+								<label htmlFor="checkid2">
 									I accept the{" "}
 									<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
 										Terms of Use

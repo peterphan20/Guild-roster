@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { postMember } from "../helpers/crudMembers";
 import styled from "styled-components";
 
-const AddMember = () => {
+const AddMember = ({ auth }) => {
 	const [username, setUsername] = useState("");
 	const [rank, setRank] = useState("");
 	const [classname, setClassname] = useState("");
@@ -11,6 +11,11 @@ const AddMember = () => {
 	const [error, setError] = useState({});
 
 	const onAddSubmit = async () => {
+		const testToken = localStorage.getItem("jwtToken");
+		if (!testToken) {
+			return;
+		}
+
 		const memberObj = JSON.stringify({
 			username: username,
 			rank: rank,
@@ -18,7 +23,8 @@ const AddMember = () => {
 			race: race,
 		});
 
-		const response = await postMember(memberObj);
+		const response = await postMember(memberObj, JSON.parse(testToken).token);
+		console.log("this is the response", response);
 
 		if (Array.isArray(response)) {
 			setSuccess(response);
@@ -33,6 +39,10 @@ const AddMember = () => {
 	};
 
 	const renderResponse = () => {
+		if (!auth) {
+			console.log("checking for auth", auth);
+			return <p>You are not signed in!</p>;
+		}
 		if (success[0]) {
 			return (
 				<SuccessText>
@@ -99,6 +109,20 @@ const AddContainer = styled.div`
 	min-height: 100%;
 	min-width: 100%;
 `;
+const AddMemberh1 = styled.h1`
+	background-color: #a66a89;
+	color: #121212;
+	text-align: center;
+	font-weight: 600;
+	font-size: 18px;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	padding: 10px;
+	width: 21%;
+`;
 const AddForm = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -114,20 +138,7 @@ const AddForm = styled.div`
 	padding-bottom: 10px;
 	width: 21%;
 `;
-const AddMemberh1 = styled.h1`
-	background-color: #a66a89;
-	color: #121212;
-	text-align: center;
-	font-weight: 600;
-	font-size: 18px;
-	border-top: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
-	padding: 10px;
-	width: 21%;
-`;
+
 const InputLabelFields = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -173,53 +184,3 @@ const FailureText = styled.div`
 	text-align: center;
 	padding: 10px 5px 4px 5px;
 `;
-/* h1 {
-
-	}
-	Label {
-		color: rgb(255, 144, 21);
-		font-size: 12px;
-		text-align: left;
-		margin-left: 5px;
-	}
-	input {
-		background-color: #fffae9;
-		display: block;
-		color: darkslategray;
-		border: none;
-		padding: 6px;
-		font-size: 13px;
-		border-radius: 5px;
-		margin-top: 5px;
-		margin-bottom: 3px;
-		width: 270px;
-	}
-	button {
-		background-color: rgb(255, 144, 21);
-		font-size: 13px;
-		font-weight: 500;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
-		padding: 8px 20px;
-		width: 270px;
-		margin-top: 26px;
-		margin-bottom: 25px;
-	}
-	p {
-		font-size: 12px;
-		color: rgb(255, 144, 21);
-		text-align: center;
-	}
-	.add-input-label {
-		text-align: left;
-	}
-	.add-input-fields-btn {
-
-	}
-	.success-msg-header {
-		font-size: 13px;
-	}
-	.success-msg {
-		font-size: 9px;
-	} */
