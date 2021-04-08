@@ -18,6 +18,8 @@ export const sortByNameAndRank = (arr) => {
 			case "Guild Master":
 				guildMaster = arr[i];
 				break;
+			default:
+				break;
 		}
 	}
 	const sortedOfficers = sortByName(officers);

@@ -18,10 +18,10 @@ const Login = ({ auth, setAuth }) => {
 		setAuth(response);
 	};
 
-	const handleLogout = () => {
-		setAuth({});
-		localStorage.removeItem("jwtToken");
-	};
+	// const handleLogout = () => {
+	// 	setAuth({});
+	// 	localStorage.removeItem("jwtToken");
+	// };
 
 	return (
 		<LoginContainer>
@@ -194,11 +194,11 @@ const LoginBtn = styled.button`
 		);
 	}
 `;
-const ResponseText = styled.p`
-	font-size: 8px;
-	color: red;
-	margin-top: 10px;
-`;
+// const ResponseText = styled.p`
+// 	font-size: 8px;
+// 	color: red;
+// 	margin-top: 10px;
+// `;
 const IconText = styled.p`
 	font-size: 7px;
 	font-weight: 300;
