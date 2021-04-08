@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 
 const Login = ({ auth, setAuth }) => {
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+	const [loginUsername, setLoginUsername] = useState("");
+	const [loginPassword, setLoginPassword] = useState("");
 
 	const handleLoginAuth = async () => {
-		const response = await fetchAuthToken(username, password);
+		const response = await fetchAuthToken(loginUsername, loginPassword);
 		if (!response.token) {
 			return;
 		}
@@ -27,35 +27,33 @@ const Login = ({ auth, setAuth }) => {
 		<LoginContainer>
 			<LoginForm>
 				<Loginh1>Login</Loginh1>
-				<div className="login-input-fields">
-					<div className="input-field">
-						<LoginLabel htmlFor="login-email">Username</LoginLabel>
-						<IconTextBox className="icon-textbox">
-							<i className="far fa-user"></i>
-							<LoginInputField
-								type="text"
-								id="login-email"
-								placeholder="Username"
-								required
-								value={username}
-								onChange={(e) => setUsername(e.target.value)}
-							/>
-						</IconTextBox>
-					</div>
-					<div className="input-field">
-						<LoginLabel htmlFor="login-password">Password</LoginLabel>
-						<IconTextBox className="icon-textbox">
-							<i className="fas fa-lock"></i>
-							<LoginInputField
-								type="password"
-								id="login-password"
-								placeholder="Password"
-								required
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-						</IconTextBox>
-					</div>
+				<div className="input-field">
+					<LoginLabel htmlFor="login-email">Username</LoginLabel>
+					<IconTextBox>
+						<i className="far fa-user"></i>
+						<LoginInputField
+							type="text"
+							id="login-email"
+							placeholder="Username"
+							required
+							value={loginUsername}
+							onChange={(e) => setLoginUsername(e.target.value)}
+						/>
+					</IconTextBox>
+				</div>
+				<div className="input-field">
+					<LoginLabel htmlFor="login-password">Password</LoginLabel>
+					<IconTextBox>
+						<i className="fas fa-lock"></i>
+						<LoginInputField
+							type="password"
+							id="login-password"
+							placeholder="Password"
+							required
+							value={loginPassword}
+							onChange={(e) => setLoginPassword(e.target.value)}
+						/>
+					</IconTextBox>
 				</div>
 				<PasswordForgetLink>
 					Forgot your{" "}
@@ -64,7 +62,7 @@ const Login = ({ auth, setAuth }) => {
 					</a>
 					?
 				</PasswordForgetLink>
-				<LoginFooter className="login-footer">
+				<LoginFooter>
 					<LoginBtn onClick={handleLoginAuth}>Log In</LoginBtn>
 					{/* <ResponseText>{auth.username ? "you is signed in" : "you is signed out"}</ResponseText> */}
 					<IconText>Or Sign in With </IconText>
@@ -99,8 +97,12 @@ const LoginForm = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-radius: 4px;
+	border-radius: 3px;
 	width: 260px;
+
+	a {
+		text-decoration: none;
+	}
 `;
 const Loginh1 = styled.h1`
 	font-size: 20px;

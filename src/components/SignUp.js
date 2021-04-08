@@ -1,206 +1,265 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
+	const [signupEmail, setSignupEmail] = useState("");
+	const [signupName, setSignupName] = useState("");
+	const [signupUsername, setSignupUsername] = useState("");
+	const [signupPassword, setSignupPassword] = useState("");
+
+	const handleSignupAuth = () => {
+		console.log("hello");
+	};
+
 	return (
-		<TableContainer className="signup-container">
-			<div className="center">
-				<table>
-					<thread>
-						<tr>
-							<td style={{ width: "33.33%" }}>
-								<div className="dash"></div>
-							</td>
-							<td style={{ padding: "0 6px" }}>
-								<h1>Register</h1>
-							</td>
-							<td style={{ width: "33.33%" }}>
-								<div className="dash"></div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3">
-								<p>Create your account. It's free and only takes a minute.</p>
-							</td>
-						</tr>
-					</thread>
-					<tr>
-						<td colspan="3">
-							<div>
-								<input placeholder="First Name" type="text" />
-								<span>
-									<input placeholder="Last Name" style={{ float: "right" }} type="text" />
-								</span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div>
-								<input type="email" placeholder="Email" />
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div>
-								<input placeholder="Password" type="password" />
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div>
-								<input placeholder="Confirm Password" type="password" />
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div className="terms">
-								<input id="checkid2" type="checkbox" value="test" />{" "}
-								<label htmlFor="checkid2">
-									I accept the{" "}
-									<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
-										Terms of Use
-									</a>{" "}
-									&{" "}
-									<a href="https://github.com/peterphan20" rel="noreferrer">
-										Privacy Policy.
-									</a>
-								</label>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div>
-								<input type="submit" value="Register Now" />
-							</div>
-						</td>
-					</tr>
-				</table>
-				<footer>
-					<p>
-						Already have an account?{" "}
-						<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
-							Sign in
-						</a>
-					</p>
-				</footer>
-			</div>
-		</TableContainer>
+		<SignupContainer>
+			<SignupForm>
+				<Signuph1>Sign Up</Signuph1>
+				<div className="input-field">
+					<SignupLabel htmlFor="signup-email">Email Address</SignupLabel>
+					<IconTextBox>
+						<i class="fas fa-inbox"></i>
+						<SignupInputField
+							type="email"
+							id="signup-email"
+							placeholder="Email Address"
+							required
+							value={signupEmail}
+							onChange={(e) => setSignupEmail(e.target.value)}
+						/>
+					</IconTextBox>
+				</div>
+				<div className="input-field">
+					<SignupLabel htmlFor="signup-email">Full Name</SignupLabel>
+					<IconTextBox>
+						<i class="fas fa-user-circle"></i>
+						<SignupInputField
+							type="text"
+							id="signup-email"
+							placeholder="Full Name"
+							required
+							value={signupName}
+							onChange={(e) => setSignupName(e.target.value)}
+						/>
+					</IconTextBox>
+				</div>
+				<div className="input-field">
+					<SignupLabel htmlFor="signup-username">Username</SignupLabel>
+					<IconTextBox>
+						<i className="far fa-user"></i>
+						<SignupInputField
+							type="text"
+							id="signup-username"
+							placeholder="Username"
+							required
+							value={signupUsername}
+							onChange={(e) => setSignupUsername(e.target.value)}
+						/>
+					</IconTextBox>
+				</div>
+				<div className="input-field">
+					<SignupLabel htmlFor="signup-password">Password</SignupLabel>
+					<IconTextBox className="icon-textbox">
+						<i className="fas fa-lock"></i>
+						<SignupInputField
+							type="password"
+							id="signup-password"
+							placeholder="Password"
+							required
+							value={signupPassword}
+							onChange={(e) => setSignupPassword(e.target.value)}
+						/>
+					</IconTextBox>
+				</div>
+				<SignupFooter>
+					<SignupBtn onClick={handleSignupAuth}>Log In</SignupBtn>
+					<IconText>Or sign up with </IconText>
+					<FooterIcons>
+						<i class="fab fa-facebook-f facebook"></i>
+						<i class="fab fa-twitter twitter"></i>
+						<i class="fab fa-google google"></i>
+					</FooterIcons>
+					<Login>
+						Already have an account? <Link to="/login">Login</Link>
+					</Login>
+				</SignupFooter>
+			</SignupForm>
+		</SignupContainer>
 	);
 };
 
 export default SignUp;
 
-const TableContainer = styled.div`
-	.center {
-		width: 100%;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		-ms-transform: translate(-50%, -50%);
-		-webkit-transform: translate(-50%, -50%);
-	}
-	table {
-		width: 50%;
-		margin: 0 auto;
-		padding: 2%;
+const SignupContainer = styled.div`
+	background-color: #e5e7eb;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100%;
+	min-width: 100%;
+`;
+const SignupForm = styled.div`
+	background-color: #f9fafb;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	width: 260px;
+`;
+const Signuph1 = styled.h1`
+	font-size: 20px;
+	font-weight: 600;
+	margin-top: 35px;
+	margin-bottom: 10px;
+`;
+const SignupLabel = styled.label`
+	font-size: 8px;
+	font-weight: 400;
+	display: block;
+	margin-top: 18px;
+	margin-bottom: 2px;
+`;
+const SignupInputField = styled.input`
+	background: transparent;
+	color: #333333;
+	font-size: 10px;
+	border: none;
+	outline: none;
+	padding: 3px 65px 0px 7px;
+`;
+const IconTextBox = styled.div`
+	margin: 0 0.125em;
+	display: inline;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #adadad;
+	vertical-align: baseline;
 
-		border-radius: 4px;
-		background-color: #f2f3f7;
-		min-width: 360px;
-		max-width: 420px;
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-		border: 1px solid #58677b;
+	i {
+		font-size: 8px;
+		color: #333333;
 	}
-	input[type="text"],
-	[type="email"],
-	[type="password"],
-	[type="submit"] {
-		width: 100%;
-		height: 40px;
-		padding: 12px;
-		border: 1px solid #cccccc;
-		border-radius: 3px;
-		outline: none;
-		font-size: 14px;
-		color: #4fa64e;
+`;
+const SignupFooter = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+const SignupBtn = styled.button`
+	background-image: linear-gradient(
+		to right,
+		#00e9ff,
+		#00d4ff,
+		#00bcff,
+		#00a3ff,
+		#0085ff,
+		#2775ff,
+		#4e60ff,
+		#7244ff,
+		#853cfe,
+		#9731fd,
+		#a722fb,
+		#b700f8
+	);
+	color: #fffae9;
+	font-size: 10px;
+	font-weight: 400;
+	border: none;
+	outline: none;
+	border-radius: 15px;
+	margin-top: 18px;
+	width: 20em;
+	height: 2.4em;
+	transition: background-image 0.3s ease;
+	cursor: pointer;
+	&:hover {
+		background-image: linear-gradient(
+			to left,
+			#00e9ff,
+			#00d4ff,
+			#00bcff,
+			#00a3ff,
+			#0085ff,
+			#2775ff,
+			#4e60ff,
+			#7244ff,
+			#853cfe,
+			#9731fd,
+			#a722fb,
+			#b700f8
+		);
 	}
-	input[type="text"] {
-		width: 49%;
+`;
+const IconText = styled.p`
+	font-size: 7px;
+	font-weight: 300;
+	margin-top: 20px;
+`;
+const FooterIcons = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	i {
+		color: #fffae9;
+		margin-top: 7px;
+		margin-left: 2px;
+		margin-right: 2px;
 	}
-	input:hover {
-		border-color: #4fa64e;
-	}
-	input[type="submit"] {
-		background-color: #53ac53;
-		background: linear-gradient(to bottom, #58b358 0%, #449944 100%);
-		color: #ffffff;
-		font-weight: 600;
-		border: none;
-	}
-	input[type="submit"]:hover {
+	.facebook {
+		background-color: rgb(59, 89, 152);
+		font-size: 12px;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		padding-top: 4px;
+		padding-left: 6.4px;
+		transition: 0.1s ease-in;
 		cursor: pointer;
 	}
-	::placeholder {
-		color: #969fa4;
+	.facebook:hover {
+		background-color: #212529;
+		transform: scale(1.14);
 	}
-	.signup-input-field {
+	.twitter {
+		background-color: rgb(0, 172, 238);
+		font-size: 10px;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		padding-top: 5px;
+		padding-left: 5.3px;
+		transition: 0.1s ease-in;
+		cursor: pointer;
 	}
-	p {
-		text-align: center;
-		font-size: 14px;
-		color: #969fa4;
-		margin: 12px 0;
+	.twitter:hover {
+		background-color: #212529;
+		transform: scale(1.14);
 	}
-	input[type="checkbox"] {
-		vertical-align: middle;
-		height: 14px;
-		width: 14px;
-		background-color: red;
+	.google {
+		background-color: rgb(219 68 55);
+		font-size: 9.5px;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		padding-top: 5.3px;
+		padding-left: 5.6px;
+		transition: 0.1s ease-in;
+		cursor: pointer;
 	}
-	.terms > label {
-		font-size: 14px;
-		color: #969fa4;
-		margin-left: 6px;
+	.google:hover {
+		background-color: #212529;
+		transform: scale(1.14);
 	}
-	div {
-		margin: 10px 0;
-	}
-	a {
-		color: #4fa64e;
-		text-decoration: none;
-	}
-	footer {
-		margin-top: 16px;
-	}
-	footer > p {
-		color: #ffffff;
-	}
-	footer > p > a {
-		color: #ffffff;
-		text-decoration: underline;
-	}
-	.dash {
-		min-height: 2px;
-		height: 2px;
-		max-height: 2px;
-		width: 100%;
-		background-color: #d4d4d4;
-	}
-	h1 {
-		text-align: center;
-		font-weight: 500;
-		color: #636363;
-		text-align: 31px;
-	}
-	.top {
-		width: 100%;
-		background-color: salmon;
-	}
+`;
+const Login = styled.div`
+	font-size: 7px;
+	font-weight: 300;
+	padding-top: 15px;
+	margin-top: 15px;
+	margin-bottom: 30px;
 `;
