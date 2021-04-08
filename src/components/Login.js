@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fetchAuthToken } from "../helpers/auth";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import LogoutButton from "./LogoutButton";
+// import LogoutButton from "./LogoutButton";
 
 const Login = ({ auth, setAuth }) => {
 	const [loginUsername, setLoginUsername] = useState("");
@@ -67,9 +67,9 @@ const Login = ({ auth, setAuth }) => {
 					{/* <ResponseText>{auth.username ? "you is signed in" : "you is signed out"}</ResponseText> */}
 					<IconText>Or Sign in With </IconText>
 					<FooterIcons>
-						<i class="fab fa-facebook-f facebook"></i>
-						<i class="fab fa-twitter twitter"></i>
-						<i class="fab fa-google google"></i>
+						<i className="fab fa-facebook-f facebook"></i>
+						<i className="fab fa-twitter twitter"></i>
+						<i className="fab fa-google google"></i>
 					</FooterIcons>
 					<SignUp>
 						Don't have an account? <Link to="/signup">Sign Up</Link>

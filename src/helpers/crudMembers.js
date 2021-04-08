@@ -15,8 +15,6 @@ export const postMember = async (memberObj) => {
 };
 
 export const putMember = async (id, editMemberObj, token) => {
-	console.log(editMemberObj);
-	console.log(token);
 	const res = await fetch(`https://guildroster.herokuapp.com/members/${id}`, {
 		method: "PUT",
 		body: JSON.stringify(editMemberObj),

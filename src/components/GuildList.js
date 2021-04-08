@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { randomBytes } from "crypto";
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
+import { sortByNameAndRank } from "../helpers/sortedList";
 
 const GuildList = ({
 	setCurrentSelectedMember,
@@ -14,7 +15,7 @@ const GuildList = ({
 }) => {
 	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
-
+	console.log(results);
 	useEffect(() => {
 		fetchMembers(setResults);
 	}, []);
@@ -44,7 +45,6 @@ const GuildList = ({
 		setEditClassname(classname);
 		setEditRace(race);
 
-		window.scrollTo(0, 0);
 		setCurrentSelectedMember({
 			memberId: memberId,
 			username: username,
@@ -54,7 +54,7 @@ const GuildList = ({
 		});
 	};
 
-	const renderedList = results
+	const renderedList = sortByNameAndRank(results)
 		.filter((card) => {
 			if (term === "") {
 				return true;
@@ -158,7 +158,6 @@ const Navbar = styled.div`
 	height: 2.6rem;
 `;
 const Searchbar = styled.div`
-	
 	display: flex;
 	justify-content: center;
 	align-items: center;
