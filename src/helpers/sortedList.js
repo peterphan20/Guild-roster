@@ -22,6 +22,7 @@ export const sortByNameAndRank = (arr) => {
 				break;
 		}
 	}
+
 	const sortedOfficers = sortByName(officers);
 	const sortedMembers = sortByName(members);
 	const sortedPeons = sortByName(peons);

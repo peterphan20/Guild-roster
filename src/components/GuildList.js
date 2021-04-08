@@ -15,7 +15,7 @@ const GuildList = ({
 }) => {
 	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
-	console.log(results);
+
 	useEffect(() => {
 		fetchMembers(setResults);
 	}, []);
@@ -71,7 +71,7 @@ const GuildList = ({
 		.map((user) => {
 			const avatarHash = randomBytes(20).toString("hex");
 			return (
-				<MemberCard key={user.id}>
+				<MemberCard key={parseInt(user.id)}>
 					<HeaderCard>
 						<div className="avatar">
 							<img
@@ -84,7 +84,7 @@ const GuildList = ({
 							<h2>{user.rank}</h2>
 						</div>
 					</HeaderCard>
-					<CharacterDescription className="member-class-race">
+					<CharacterDescription>
 						<h3>{user.classname}</h3>
 						<h5>{user.race}</h5>
 					</CharacterDescription>
@@ -108,7 +108,7 @@ const GuildList = ({
 								</EditBtn>
 							</Link>
 						</DeleteEditBtn>
-						<FooterIcon className="member-icon">
+						<FooterIcon>
 							<i className="fas fa-plus-circle healer"></i>
 							<i className="fas fa-shield-alt tank"></i>
 							<i className="fas fa-khanda dps"></i>
