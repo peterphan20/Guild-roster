@@ -1,7 +1,7 @@
 const CONTENT_TYPE_JSON = { "Content-Type": "application/json; charset=UTF-8" };
 
 export const fetchAuthToken = async (username, password) => {
-	const response = await fetch("https://api-guildroster.herokuapp.com/auth/jwt/login", {
+	const response = await fetch("https://guildroster.herokuapp.com/auth/jwt/login", {
 		method: "POST",
 		body: JSON.stringify({
 			username: username,
@@ -14,7 +14,7 @@ export const fetchAuthToken = async (username, password) => {
 };
 
 export const testAuth = async (token) => {
-	const response = await fetch("https://api-guildroster.herokuapp.com/auth/jwt/test", {
+	const response = await fetch("https://guildroster.herokuapp.com/auth/jwt/test", {
 		method: "GET",
 		headers: {
 			Authorization: `Bearer ${token}`,

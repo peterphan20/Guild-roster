@@ -15,7 +15,6 @@ const App = () => {
 	const [editRace, setEditRace] = useState("");
 	const [auth, setAuth] = useState({});
 
-
 	return (
 		<Container>
 			<Router>

@@ -158,12 +158,15 @@ const Navbar = styled.div`
 	height: 2.6rem;
 `;
 const Searchbar = styled.div`
+	
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 
 	input {
+		background-color: #fffae9;
+		font-size: 12px;
 		border: none;
 		border-radius: 6px;
 		padding: 3px 150px 3px 5px;
