@@ -16,6 +16,7 @@ const Nav = () => {
 					<Link to="/signup">Sign Up</Link>
 				</NavLink>
 			</MenuBar>
+			<div className="bottom-nav-bar"></div>
 		</nav>
 	);
 };
@@ -28,9 +29,10 @@ const MenuBar = styled.nav`
 	align-items: center;
 
 	a {
-		font-size: 12px;
+		font-size: 18px;
+		font-weight: 600;
 		text-decoration: none;
-		color: rgb(255, 144, 21);
+		color: #28282b;
 	}
 `;
 const NavLink = styled.li`

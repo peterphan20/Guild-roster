@@ -19,7 +19,7 @@ const SignUp = () => {
 				<div className="input-field">
 					<SignupLabel htmlFor="signup-email">Email Address</SignupLabel>
 					<IconTextBox>
-						<i class="fas fa-inbox"></i>
+						<i className="fas fa-inbox"></i>
 						<SignupInputField
 							type="email"
 							id="signup-email"
@@ -33,7 +33,7 @@ const SignUp = () => {
 				<div className="input-field">
 					<SignupLabel htmlFor="signup-email">Full Name</SignupLabel>
 					<IconTextBox>
-						<i class="fas fa-user-circle"></i>
+						<i className="fas fa-user-circle"></i>
 						<SignupInputField
 							type="text"
 							id="signup-email"
@@ -76,9 +76,9 @@ const SignUp = () => {
 					<SignupBtn onClick={handleSignupAuth}>Log In</SignupBtn>
 					<IconText>Or sign up with </IconText>
 					<FooterIcons>
-						<i class="fab fa-facebook-f facebook"></i>
-						<i class="fab fa-twitter twitter"></i>
-						<i class="fab fa-google google"></i>
+						<i className="fab fa-facebook-f facebook"></i>
+						<i className="fab fa-twitter twitter"></i>
+						<i className="fab fa-google google"></i>
 					</FooterIcons>
 					<Login>
 						Already have an account? <Link to="/login">Login</Link>

@@ -13,7 +13,6 @@ export const fetchAuthToken = async (username, password) => {
 	return data;
 };
 
-// Test authentication
 export const testAuth = async (token) => {
 	const response = await fetch("https://guildroster.herokuapp.com/auth/jwt/test", {
 		method: "GET",
