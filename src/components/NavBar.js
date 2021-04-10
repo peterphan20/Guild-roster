@@ -2,26 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Nav = () => {
+const NavBar = () => {
 	return (
-		<nav className="nav-ui">
-			<MenuBar className="nav-menu">
-				<NavLink className="nav-link">
+		<nav>
+			<MenuBar>
+				<NavLink>
 					<Link to="/addmember">Add Member</Link>
 				</NavLink>
-				<NavLink className="nav-link">
+				<NavLink>
 					<Link to="/login">Log In</Link>
 				</NavLink>
-				<NavLink className="nav-link">
+				<NavLink>
 					<Link to="/signup">Sign Up</Link>
 				</NavLink>
 			</MenuBar>
-			<div className="bottom-nav-bar"></div>
 		</nav>
 	);
 };
 
-export default Nav;
+export default NavBar;
 
 const MenuBar = styled.nav`
 	display: flex;

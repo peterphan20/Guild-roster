@@ -1,97 +1,89 @@
 import React, { useState } from "react";
+import { fetchAuthToken } from "../helpers/auth";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+// import LogoutButton from "./LogoutButton";
 
-const SignUp = () => {
-	const [signupEmail, setSignupEmail] = useState("");
-	const [signupName, setSignupName] = useState("");
-	const [signupUsername, setSignupUsername] = useState("");
-	const [signupPassword, setSignupPassword] = useState("");
+const MemberLoginPage = ({ auth, setAuth }) => {
+	const [loginUsername, setLoginUsername] = useState("");
+	const [loginPassword, setLoginPassword] = useState("");
 
-	const handleSignupAuth = () => {
-		console.log("hello");
+	const handleLoginAuth = async () => {
+		const response = await fetchAuthToken(loginUsername, loginPassword);
+		if (!response.token) {
+			return;
+		}
+		localStorage.setItem("jwtToken", JSON.stringify(response));
+		console.log("token is generated");
+		setAuth(response);
 	};
 
+	// const handleLogout = () => {
+	// 	setAuth({});
+	// 	localStorage.removeItem("jwtToken");
+	// };
+
 	return (
-		<SignupContainer>
-			<SignupForm>
-				<Signuph1>Sign Up</Signuph1>
+		<LoginContainer>
+			<LoginForm>
+				<Loginh1>Login</Loginh1>
 				<div className="input-field">
-					<SignupLabel htmlFor="signup-email">Email Address</SignupLabel>
-					<IconTextBox>
-						<i className="fas fa-inbox"></i>
-						<SignupInputField
-							type="email"
-							id="signup-email"
-							placeholder="Email Address"
-							required
-							value={signupEmail}
-							onChange={(e) => setSignupEmail(e.target.value)}
-						/>
-					</IconTextBox>
-				</div>
-				<div className="input-field">
-					<SignupLabel htmlFor="signup-email">Full Name</SignupLabel>
-					<IconTextBox>
-						<i className="fas fa-user-circle"></i>
-						<SignupInputField
-							type="text"
-							id="signup-email"
-							placeholder="Full Name"
-							required
-							value={signupName}
-							onChange={(e) => setSignupName(e.target.value)}
-						/>
-					</IconTextBox>
-				</div>
-				<div className="input-field">
-					<SignupLabel htmlFor="signup-username">Username</SignupLabel>
+					<LoginLabel htmlFor="login-email">Username</LoginLabel>
 					<IconTextBox>
 						<i className="far fa-user"></i>
-						<SignupInputField
+						<LoginInputField
 							type="text"
-							id="signup-username"
+							id="login-email"
 							placeholder="Username"
 							required
-							value={signupUsername}
-							onChange={(e) => setSignupUsername(e.target.value)}
+							value={loginUsername}
+							onChange={(e) => setLoginUsername(e.target.value)}
 						/>
 					</IconTextBox>
 				</div>
 				<div className="input-field">
-					<SignupLabel htmlFor="signup-password">Password</SignupLabel>
-					<IconTextBox className="icon-textbox">
+					<LoginLabel htmlFor="login-password">Password</LoginLabel>
+					<IconTextBox>
 						<i className="fas fa-lock"></i>
-						<SignupInputField
+						<LoginInputField
 							type="password"
-							id="signup-password"
+							id="login-password"
 							placeholder="Password"
 							required
-							value={signupPassword}
-							onChange={(e) => setSignupPassword(e.target.value)}
+							value={loginPassword}
+							onChange={(e) => setLoginPassword(e.target.value)}
 						/>
 					</IconTextBox>
 				</div>
-				<SignupFooter>
-					<SignupBtn onClick={handleSignupAuth}>Log In</SignupBtn>
-					<IconText>Or sign up with </IconText>
+				<PasswordForgetLink>
+					Forgot your{" "}
+					<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
+						password
+					</a>
+					?
+				</PasswordForgetLink>
+				<LoginFooter>
+					<LoginBtn onClick={handleLoginAuth}>Log In</LoginBtn>
+					{/* <ResponseText>{auth.username ? "you is signed in" : "you is signed out"}</ResponseText> */}
+					<IconText>Or Sign in With </IconText>
 					<FooterIcons>
 						<i className="fab fa-facebook-f facebook"></i>
 						<i className="fab fa-twitter twitter"></i>
 						<i className="fab fa-google google"></i>
 					</FooterIcons>
-					<Login>
-						Already have an account? <Link to="/login">Login</Link>
-					</Login>
-				</SignupFooter>
-			</SignupForm>
-		</SignupContainer>
+					<SignUp>
+						Don't have an account? <Link to="/signup">Sign Up</Link>
+					</SignUp>
+					{/* <button onClick={handleLogout}>logout</button>*/}
+				</LoginFooter>
+			</LoginForm>
+		</LoginContainer>
 	);
 };
 
-export default SignUp;
+export default MemberLoginPage;
 
-const SignupContainer = styled.div`
+const LoginContainer = styled.div`
 	background-color: #e5e7eb;
 	display: flex;
 	justify-content: center;
@@ -99,29 +91,33 @@ const SignupContainer = styled.div`
 	min-height: 100%;
 	min-width: 100%;
 `;
-const SignupForm = styled.div`
+const LoginForm = styled.div`
 	background-color: #f9fafb;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-radius: 4px;
+	border-radius: 3px;
 	width: 260px;
+
+	a {
+		text-decoration: none;
+	}
 `;
-const Signuph1 = styled.h1`
+const Loginh1 = styled.h1`
 	font-size: 20px;
 	font-weight: 600;
 	margin-top: 35px;
 	margin-bottom: 10px;
 `;
-const SignupLabel = styled.label`
+const LoginLabel = styled.label`
 	font-size: 8px;
 	font-weight: 400;
 	display: block;
 	margin-top: 18px;
 	margin-bottom: 2px;
 `;
-const SignupInputField = styled.input`
+const LoginInputField = styled.input`
 	background: transparent;
 	color: #333333;
 	font-size: 10px;
@@ -142,13 +138,19 @@ const IconTextBox = styled.div`
 		color: #333333;
 	}
 `;
-const SignupFooter = styled.div`
+const PasswordForgetLink = styled.p`
+	font-size: 7px;
+	margin-left: 17em;
+	margin-top: 5px;
+	margin-bottom: 17px;
+`;
+const LoginFooter = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `;
-const SignupBtn = styled.button`
+const LoginBtn = styled.button`
 	background-image: linear-gradient(
 		to right,
 		#00e9ff,
@@ -170,7 +172,6 @@ const SignupBtn = styled.button`
 	border: none;
 	outline: none;
 	border-radius: 15px;
-	margin-top: 18px;
 	width: 20em;
 	height: 2.4em;
 	transition: background-image 0.3s ease;
@@ -193,6 +194,11 @@ const SignupBtn = styled.button`
 		);
 	}
 `;
+// const ResponseText = styled.p`
+// 	font-size: 8px;
+// 	color: red;
+// 	margin-top: 10px;
+// `;
 const IconText = styled.p`
 	font-size: 7px;
 	font-weight: 300;
@@ -256,7 +262,7 @@ const FooterIcons = styled.div`
 		transform: scale(1.14);
 	}
 `;
-const Login = styled.div`
+const SignUp = styled.div`
 	font-size: 7px;
 	font-weight: 300;
 	padding-top: 15px;
