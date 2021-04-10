@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { putMember } from "../helpers/crudMembers";
-import styled from "styled-components";
-// import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { putMember } from '../helpers/crudMembers';
+import styled from 'styled-components';
 
-const EditMember = (props) => {
-	const [editResponse, setEditResponse] = useState("");
+const MemberEditPage = (props) => {
+	const [editResponse, setEditResponse] = useState('');
 	const { memberId } = props.currentSelectedMember;
 
 	const onEditSubmit = async () => {
-		const testToken = localStorage.getItem("jwtToken");
-		console.log("checking to see if token is stored", testToken);
+		const testToken = localStorage.getItem('jwtToken');
+		console.log('checking to see if token is stored', testToken);
 		if (!testToken) {
 			return;
 		}
@@ -21,53 +20,53 @@ const EditMember = (props) => {
 		};
 		const response = await putMember(memberId, editMemberObj, JSON.parse(testToken).token);
 		if (!props.username || !props.password) {
-			setEditResponse("Please Sign In!");
+			setEditResponse('Please Sign In!');
 		} else if (!response.details) {
 			// successful put request
-			setEditResponse("Member successfully edited! ✔️");
+			setEditResponse('Member successfully edited! ✔️');
 		} else {
 			// else not successfull
-			setEditResponse("There was an error, alphanumeric numbers only! 😿");
+			setEditResponse('There was an error, alphanumeric numbers only! 😿');
 		}
 	};
 
 	return (
 		<EditContainer>
 			<EditMemberh1>Edit Member</EditMemberh1>
-			<EditForm className="edit-input-fields-btn">
-				<InputLabelFields className="edit-input-fields">
-					<Label htmlFor="charUsername">Username</Label>
+			<EditForm className='edit-input-fields-btn'>
+				<InputLabelFields className='edit-input-fields'>
+					<Label htmlFor='charUsername'>Username</Label>
 					<InputField
-						type="text"
-						id="charUsername"
+						type='text'
+						id='charUsername'
 						value={props.editUsername}
 						onChange={(e) => props.setEditUsername(e.target.value)}
 						required
 					/>
-					<Label htmlFor="charRank">Rank</Label>
+					<Label htmlFor='charRank'>Rank</Label>
 					<InputField
-						type="text"
+						type='text'
 						value={props.editRank}
 						onChange={(e) => props.setEditRank(e.target.value)}
 						required
 					/>
-					<Label htmlFor="charClassname">Classname</Label>
+					<Label htmlFor='charClassname'>Classname</Label>
 					<InputField
-						type="text"
+						type='text'
 						value={props.editClassname}
 						onChange={(e) => props.setEditClassname(e.target.value)}
 						required
 					/>
-					<Label htmlFor="charRace">Race</Label>
+					<Label htmlFor='charRace'>Race</Label>
 					<InputField
-						type="text"
+						type='text'
 						value={props.editRace}
 						onChange={(e) => props.setEditRace(e.target.value)}
 						required
 					/>
 				</InputLabelFields>
 				{/* <Link to="/"> */}
-				<AddButton className="edit-btn" onClick={onEditSubmit}>
+				<AddButton className='edit-btn' onClick={onEditSubmit}>
 					Submit
 				</AddButton>
 				{/* </Link> */}
@@ -77,7 +76,7 @@ const EditMember = (props) => {
 	);
 };
 
-export default EditMember;
+export default MemberEditPage;
 
 const EditContainer = styled.div`
 	background-color: #121212;

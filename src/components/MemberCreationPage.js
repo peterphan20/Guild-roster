@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { postMember } from "../helpers/crudMembers";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import { postMember } from '../helpers/crudMembers';
+import styled from 'styled-components';
 
-const AddMember = ({ auth }) => {
-	const [username, setUsername] = useState("");
-	const [rank, setRank] = useState("");
-	const [classname, setClassname] = useState("");
-	const [race, setRace] = useState("");
+const MemberCreationPage = ({ auth }) => {
+	const [username, setUsername] = useState('');
+	const [rank, setRank] = useState('');
+	const [classname, setClassname] = useState('');
+	const [race, setRace] = useState('');
 	const [success, setSuccess] = useState([]);
 	const [error, setError] = useState({});
 
 	const onAddSubmit = async () => {
-		const testToken = localStorage.getItem("jwtToken");
+		const testToken = localStorage.getItem('jwtToken');
 		if (!testToken) {
 			return;
 		}
@@ -24,14 +24,14 @@ const AddMember = ({ auth }) => {
 		});
 
 		const response = await postMember(memberObj, JSON.parse(testToken).token);
-		console.log("this is the response", response);
+		console.log('this is the response', response);
 
 		if (Array.isArray(response)) {
 			setSuccess(response);
-			setUsername("");
-			setRank("");
-			setClassname("");
-			setRace("");
+			setUsername('');
+			setRank('');
+			setClassname('');
+			setRace('');
 		} else {
 			setSuccess([]);
 			setError(response);
@@ -40,19 +40,19 @@ const AddMember = ({ auth }) => {
 
 	const renderResponse = () => {
 		if (!auth) {
-			console.log("checking for auth", auth);
+			console.log('checking for auth', auth);
 			return <p>You are not signed in!</p>;
 		}
 		if (success[0]) {
 			return (
 				<SuccessText>
-					<p className="success-msg-header">Congratulations! You have created a Member 🦖</p>
-					<p className="success-msg">
+					<p className='success-msg-header'>Congratulations! You have created a Member 🦖</p>
+					<p className='success-msg'>
 						User: {success[0].username}, Rank: {success[0].rank}, Class: {success[0].classname},
 						Race: {success[0].race}
 					</p>
-					<p className="success-msg">
-						Joined: {new Date(success[0].joined).toLocaleDateString("en-us")}
+					<p className='success-msg'>
+						Joined: {new Date(success[0].joined).toLocaleDateString('en-us')}
 					</p>
 				</SuccessText>
 			);
@@ -72,24 +72,24 @@ const AddMember = ({ auth }) => {
 			<AddMemberh1>Add Member</AddMemberh1>
 			<AddForm>
 				<InputLabelFields>
-					<Label htmlFor="addCharUsername">Username</Label>
+					<Label htmlFor='addCharUsername'>Username</Label>
 					<InputField
-						type="text"
+						type='text'
 						required
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
-					<Label htmlFor="addCharRank">Rank</Label>
-					<InputField type="text" required value={rank} onChange={(e) => setRank(e.target.value)} />
-					<Label htmlFor="addCharClassname">Classname</Label>
+					<Label htmlFor='addCharRank'>Rank</Label>
+					<InputField type='text' required value={rank} onChange={(e) => setRank(e.target.value)} />
+					<Label htmlFor='addCharClassname'>Classname</Label>
 					<InputField
-						type="text"
+						type='text'
 						required
 						value={classname}
 						onChange={(e) => setClassname(e.target.value)}
 					/>
-					<Label htmlFor="addCharRace">Race</Label>
-					<InputField type="text" required value={race} onChange={(e) => setRace(e.target.value)} />
+					<Label htmlFor='addCharRace'>Race</Label>
+					<InputField type='text' required value={race} onChange={(e) => setRace(e.target.value)} />
 				</InputLabelFields>
 				<AddButton onClick={onAddSubmit}>Submit</AddButton>
 				{renderResponse()}
@@ -98,7 +98,7 @@ const AddMember = ({ auth }) => {
 	);
 };
 
-export default AddMember;
+export default MemberCreationPage;
 
 const AddContainer = styled.div`
 	background-color: #63738a;

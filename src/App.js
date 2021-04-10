@@ -1,26 +1,29 @@
-import React, { useState } from "react";
-import AddMember from "./components/AddMember";
-import EditMember from "./components/EditMember";
-import GuildList from "./components/GuildList";
-import styled from "styled-components";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import MemberCreationPage from './components/MemberCreationPage';
+import MemberEditPage from './components/MemberEditPage';
+import MemberSignupPage from './components/MemberSignupPage';
+import MemberLoginPage from './components/MemberLoginPage';
+import GuildListContainer from './components/GuildListContainer';
+import NavBar from './components/NavBar';
 
 const App = () => {
 	const [currentSelectedMember, setCurrentSelectedMember] = useState({});
-	const [editUsername, setEditUsername] = useState("");
-	const [editRank, setEditRank] = useState("");
-	const [editClassname, setEditClassname] = useState("");
-	const [editRace, setEditRace] = useState("");
+	const [editUsername, setEditUsername] = useState('');
+	const [editRank, setEditRank] = useState('');
+	const [editClassname, setEditClassname] = useState('');
+	const [editRace, setEditRace] = useState('');
 	const [auth, setAuth] = useState({});
 
 	return (
 		<Container>
 			<Router>
+				<NavBar />
 				<Switch>
-					<Route path="/" exact>
-						<GuildList
+					<Route path='/' exact>
+						<GuildListContainer
 							setCurrentSelectedMember={setCurrentSelectedMember}
 							setEditRank={setEditRank}
 							setEditClassname={setEditClassname}
@@ -28,11 +31,11 @@ const App = () => {
 							setEditUsername={setEditUsername}
 						/>
 					</Route>
-					<Route path="/addmember">
-						<AddMember auth={auth} setAuth={auth} />
+					<Route path='/addmember'>
+						<MemberCreationPage auth={auth} setAuth={auth} />
 					</Route>
-					<Route path="/editmember">
-						<EditMember
+					<Route path='/editmember'>
+						<MemberEditPage
 							currentSelectedMember={currentSelectedMember}
 							editUsername={editUsername}
 							editRank={editRank}
@@ -44,9 +47,9 @@ const App = () => {
 							setEditUsername={setEditUsername}
 						/>
 					</Route>
-					<Route path="/signup" component={SignUp} />
-					<Route path="/login">
-						<Login auth={auth} setAuth={setAuth} />
+					<Route path='/signup' component={MemberSignupPage} />
+					<Route path='/login'>
+						<MemberLoginPage auth={auth} setAuth={setAuth} />
 					</Route>
 				</Switch>
 			</Router>

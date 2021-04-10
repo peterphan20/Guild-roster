@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { fetchMembers, removeMember } from "../helpers/crudMembers";
-import styled from "styled-components";
-import { randomBytes } from "crypto";
-import { Link } from "react-router-dom";
-import Nav from "./Nav";
-import { sortByNameAndRank } from "../helpers/sortedList";
+import React, { useState, useEffect } from 'react';
+import { fetchMembers, removeMember } from '../helpers/crudMembers';
+import styled from 'styled-components';
+import { randomBytes } from 'crypto';
+import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
+import { sortByNameAndRank } from '../helpers/sortedList';
 
-const GuildList = ({
+const GuildListContainer = ({
 	setCurrentSelectedMember,
 	setEditUsername,
 	setEditRank,
 	setEditClassname,
 	setEditRace,
 }) => {
-	const [term, setTerm] = useState("");
+	const [term, setTerm] = useState('');
 	const [results, setResults] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +21,7 @@ const GuildList = ({
 	}, []);
 
 	const handleClick = (id) => {
-		const testToken = localStorage.getItem("jwtToken");
+		const testToken = localStorage.getItem('jwtToken');
 		if (!testToken) {
 			return;
 		}
@@ -55,7 +55,7 @@ const GuildList = ({
 	};
 
 	const renderedList = sortByNameAndRank(results).filter((card) => {
-		if (term === "") {
+		if (term === '') {
 			return true;
 		} else if (
 			card.username.toLowerCase().includes(term.toLowerCase()) ||
@@ -69,14 +69,14 @@ const GuildList = ({
 	});
 
 	const mappedList = renderedList.map((user) => {
-		const avatarHash = randomBytes(20).toString("hex");
+		const avatarHash = randomBytes(20).toString('hex');
 		return (
 			<MemberCard key={parseInt(user.id)}>
 				<HeaderCard>
 					<div>
 						<img
 							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%2334d399&w=70&h=70`}
-							alt="randomly generated avatar"
+							alt='randomly generated avatar'
 						></img>
 					</div>
 					<div>
@@ -89,12 +89,12 @@ const GuildList = ({
 					<h5>{user.race}</h5>
 				</CharacterDescription>
 				<CardFooter>
-					<DateJoined>{new Date(user.joined).toLocaleDateString("en-US")}</DateJoined>
+					<DateJoined>{new Date(user.joined).toLocaleDateString('en-US')}</DateJoined>
 					<DeleteEditBtn>
 						<DeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
 							Delete
 						</DeleteBtn>
-						<Link to="/editmember">
+						<Link to='/editmember'>
 							<EditBtn
 								data-id={user.id}
 								data-username={user.username}
@@ -102,16 +102,16 @@ const GuildList = ({
 								data-class={user.classname}
 								data-race={user.race}
 								onClick={(e) => handleEditClick(e)}
-								className="guild-btn"
+								className='guild-btn'
 							>
 								Edit
 							</EditBtn>
 						</Link>
 					</DeleteEditBtn>
 					<FooterIcon>
-						<i className="fas fa-plus-circle healer"></i>
-						<i className="fas fa-shield-alt tank"></i>
-						<i className="fas fa-khanda dps"></i>
+						<i className='fas fa-plus-circle healer'></i>
+						<i className='fas fa-shield-alt tank'></i>
+						<i className='fas fa-khanda dps'></i>
 					</FooterIcon>
 				</CardFooter>
 			</MemberCard>
@@ -123,14 +123,14 @@ const GuildList = ({
 			<Navbar>
 				<Searchbar>
 					<input
-						className="guild-search"
-						type="text"
-						placeholder="Search"
+						className='guild-search'
+						type='text'
+						placeholder='Search'
 						value={term}
 						onChange={(e) => setTerm(e.target.value)}
 					/>
 				</Searchbar>
-				<Nav />
+				<NavBar />
 			</Navbar>
 			<GuildPage>
 				<GuildIntroduction>
@@ -151,7 +151,7 @@ const GuildList = ({
 	);
 };
 
-export default GuildList;
+export default GuildListContainer;
 
 const MemberFormUi = styled.div`
 	background-color: #f3f4f6;
