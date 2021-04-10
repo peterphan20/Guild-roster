@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { fetchMembers, removeMember } from '../helpers/crudMembers';
-import styled from 'styled-components';
-import { randomBytes } from 'crypto';
-import { Link } from 'react-router-dom';
-import NavBar from './NavBar';
-import { sortByNameAndRank } from '../helpers/sortedList';
+import React, { useState, useEffect } from "react";
+import { fetchMembers, removeMember } from "../helpers/crudMembers";
+import styled from "styled-components";
+import { randomBytes } from "crypto";
+import { Link } from "react-router-dom";
+import { sortByNameAndRank } from "../helpers/sortedList";
 
 const GuildListContainer = ({
 	setCurrentSelectedMember,
@@ -13,7 +12,7 @@ const GuildListContainer = ({
 	setEditClassname,
 	setEditRace,
 }) => {
-	const [term, setTerm] = useState('');
+	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
 
 	useEffect(() => {
@@ -21,7 +20,7 @@ const GuildListContainer = ({
 	}, []);
 
 	const handleClick = (id) => {
-		const testToken = localStorage.getItem('jwtToken');
+		const testToken = localStorage.getItem("jwtToken");
 		if (!testToken) {
 			return;
 		}
@@ -55,7 +54,7 @@ const GuildListContainer = ({
 	};
 
 	const renderedList = sortByNameAndRank(results).filter((card) => {
-		if (term === '') {
+		if (term === "") {
 			return true;
 		} else if (
 			card.username.toLowerCase().includes(term.toLowerCase()) ||
@@ -69,14 +68,14 @@ const GuildListContainer = ({
 	});
 
 	const mappedList = renderedList.map((user) => {
-		const avatarHash = randomBytes(20).toString('hex');
+		const avatarHash = randomBytes(20).toString("hex");
 		return (
 			<MemberCard key={parseInt(user.id)}>
 				<HeaderCard>
 					<div>
 						<img
 							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%2334d399&w=70&h=70`}
-							alt='randomly generated avatar'
+							alt="randomly generated avatar"
 						></img>
 					</div>
 					<div>
@@ -89,12 +88,12 @@ const GuildListContainer = ({
 					<h5>{user.race}</h5>
 				</CharacterDescription>
 				<CardFooter>
-					<DateJoined>{new Date(user.joined).toLocaleDateString('en-US')}</DateJoined>
+					<DateJoined>{new Date(user.joined).toLocaleDateString("en-US")}</DateJoined>
 					<DeleteEditBtn>
 						<DeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
 							Delete
 						</DeleteBtn>
-						<Link to='/editmember'>
+						<Link to="/editmember">
 							<EditBtn
 								data-id={user.id}
 								data-username={user.username}
@@ -102,16 +101,16 @@ const GuildListContainer = ({
 								data-class={user.classname}
 								data-race={user.race}
 								onClick={(e) => handleEditClick(e)}
-								className='guild-btn'
+								className="guild-btn"
 							>
 								Edit
 							</EditBtn>
 						</Link>
 					</DeleteEditBtn>
 					<FooterIcon>
-						<i className='fas fa-plus-circle healer'></i>
-						<i className='fas fa-shield-alt tank'></i>
-						<i className='fas fa-khanda dps'></i>
+						<i className="fas fa-plus-circle healer"></i>
+						<i className="fas fa-shield-alt tank"></i>
+						<i className="fas fa-khanda dps"></i>
 					</FooterIcon>
 				</CardFooter>
 			</MemberCard>
@@ -120,29 +119,26 @@ const GuildListContainer = ({
 
 	return (
 		<MemberFormUi>
-			<Navbar>
-				<Searchbar>
-					<input
-						className='guild-search'
-						type='text'
-						placeholder='Search'
-						value={term}
-						onChange={(e) => setTerm(e.target.value)}
-					/>
-				</Searchbar>
-				<NavBar />
-			</Navbar>
 			<GuildPage>
 				<GuildIntroduction>
 					<h1>Guild Roster</h1>
 					<p>
 						Founded in 2021, this is a guild roster app that allows users to see members from
-						particular guilds. The user also has the ability to search for said members within the
-						guild. The list itself is sorted by ranks then usernames. This is a personal project for
-						learning purposes and is not accepting contributions. You are welcome to modify and
-						distribute any versions as you please.
+						particular guilds. The user may enter different search parameters to search for specific
+						members within said guild. The list will be sorted by ranks then usernames. This is a
+						personal project for learning purposes and is not accepting contributions. You are
+						welcome to modify and distribute any versions as you please. 🦕
 					</p>
 				</GuildIntroduction>
+				<StyledSearchbar>
+					<input
+						className="guild-search"
+						type="text"
+						placeholder="Search"
+						value={term}
+						onChange={(e) => setTerm(e.target.value)}
+					/>
+				</StyledSearchbar>
 				<GuildCardContainer>
 					{renderedList[0] ? mappedList : <Response>No users were found</Response>}
 				</GuildCardContainer>
@@ -153,24 +149,12 @@ const GuildListContainer = ({
 
 export default GuildListContainer;
 
-const MemberFormUi = styled.div`
-	background-color: #f3f4f6;
+const MemberFormUi = styled.div` 
+	background-color: #111827;
 	min-height: 100%;
 	min-width: 100%;
 `;
-const Navbar = styled.div`
-	background-color: #f3f4f6;
-	position: fixed;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 1px solid black;
-	top: 0;
-	width: 100%;
-	height: 4rem;
-	z-index: 12;
-`;
-const Searchbar = styled.div`
+const StyledSearchbar = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -184,7 +168,6 @@ const Searchbar = styled.div`
 		outline: none;
 		border-radius: 6px;
 		padding: 5px 250px 5px 10px;
-		margin-left: 19.3rem;
 	}
 `;
 const GuildPage = styled.div`
@@ -195,9 +178,10 @@ const GuildPage = styled.div`
 	width: 60em;
 `;
 const GuildIntroduction = styled.div`
-	padding-left: 50px;
-	padding-right: 50px;
 	color: #36454f;
+	padding-left: 5em;
+	padding-right: 5em;
+	margin-bottom: 6em;
 `;
 
 const GuildCardContainer = styled.div`
@@ -242,14 +226,14 @@ const HeaderCard = styled.div`
 	h2 {
 		color: #34d399;
 		font-size: 18px;
-		font-weight: 600;
+		font-weight: 700;
 		padding-bottom: 10px;
 	}
 `;
 const CharacterDescription = styled.div`
 	h3 {
 		font-size: 12px;
-		font-weight: 500;
+		font-weight: 400;
 	}
 	h5 {
 		font-size: 9px;
@@ -289,7 +273,7 @@ const DeleteEditBtn = styled.div`
 const DeleteBtn = styled.button`
 	background-color: #34d399;
 	font-size: 8px;
-	font-weight: 500;
+	font-weight: 400;
 	border: 1px solid darkslategray;
 	border-radius: 10px;
 	padding: 2.5px 9px;
@@ -303,7 +287,7 @@ const DeleteBtn = styled.button`
 const EditBtn = styled.button`
 	background-color: #34d399;
 	font-size: 8px;
-	font-weight: 500;
+	font-weight: 400;
 	border: 1px solid darkslategray;
 	border-radius: 10px;
 	padding: 2.5px 9px;
@@ -313,8 +297,4 @@ const EditBtn = styled.button`
 		transition: 0.2s ease;
 		transform: scale(1.1);
 	}
-`;
-
-const NoUsersResponse = styled.p`
-	color: black;
 `;

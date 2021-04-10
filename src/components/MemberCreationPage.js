@@ -113,7 +113,7 @@ const AddMemberh1 = styled.h1`
 	background-color: #a66a89;
 	color: #121212;
 	text-align: center;
-	font-weight: 600;
+	font-weight: 700;
 	font-size: 18px;
 	border-top: 1px solid black;
 	border-left: 1px solid black;
@@ -174,13 +174,13 @@ const AddButton = styled.button`
 `;
 const SuccessText = styled.div`
 	font-size: 8px;
-	font-weight: 500;
+	font-weight: 400;
 	text-align: center;
 	padding: 10px 5px 4px 5px;
 `;
 const FailureText = styled.div`
 	font-size: 8px;
-	font-weight: 600;
+	font-weight: 700;
 	text-align: center;
 	padding: 10px 5px 4px 5px;
 `;

@@ -106,7 +106,7 @@ const LoginForm = styled.div`
 `;
 const Loginh1 = styled.h1`
 	font-size: 20px;
-	font-weight: 600;
+	font-weight: 700;
 	margin-top: 35px;
 	margin-bottom: 10px;
 `;
@@ -201,7 +201,7 @@ const LoginBtn = styled.button`
 // `;
 const IconText = styled.p`
 	font-size: 7px;
-	font-weight: 300;
+	font-weight: 400;
 	margin-top: 20px;
 `;
 const FooterIcons = styled.div`
@@ -264,7 +264,7 @@ const FooterIcons = styled.div`
 `;
 const SignUp = styled.div`
 	font-size: 7px;
-	font-weight: 300;
+	font-weight: 400;
 	padding-top: 15px;
 	margin-top: 15px;
 	margin-bottom: 30px;
