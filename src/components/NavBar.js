@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import logo from "../assets/logo192.png";
 
 const NavBar = () => {
@@ -51,7 +52,7 @@ const StyledLogoHeader = styled.header`
 
 	a {
 		color: rgb(119, 178, 85);
-		font-weight: 700;
+
 		display: flex;
 		gap: 10px;
 		img {
@@ -61,6 +62,7 @@ const StyledLogoHeader = styled.header`
 	}
 `;
 const StyledLinkContainer = styled.div`
+	font-weight: 700;
 	display: flex;
 	align-items: center;
 	gap: 2em;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { putMember } from '../helpers/crudMembers';
 import styled from 'styled-components';
+
+import { putMember } from '../helpers/crudMembers';
 
 const MemberEditPage = (props) => {
 	const [editResponse, setEditResponse] = useState('');
@@ -8,7 +9,6 @@ const MemberEditPage = (props) => {
 
 	const onEditSubmit = async () => {
 		const testToken = localStorage.getItem('jwtToken');
-		console.log('checking to see if token is stored', testToken);
 		if (!testToken) {
 			return;
 		}

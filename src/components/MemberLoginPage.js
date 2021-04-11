@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { fetchAuthToken } from "../helpers/auth";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+import { fetchAuthToken } from "../helpers/auth";
 // import LogoutButton from "./LogoutButton";
 
 const MemberLoginPage = ({ auth, setAuth }) => {

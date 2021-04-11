@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { fetchMembers, removeMember } from "../helpers/crudMembers";
-import styled from "styled-components";
 import { randomBytes } from "crypto";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import { sortByNameAndRank } from "../helpers/sortedList";
+import { fetchMembers, removeMember } from "../helpers/crudMembers";
 
 const GuildListContainer = ({
 	setCurrentSelectedMember,
@@ -70,11 +71,11 @@ const GuildListContainer = ({
 	const mappedList = renderedList.map((user) => {
 		const avatarHash = randomBytes(20).toString("hex");
 		return (
-			<MemberCard key={parseInt(user.id)}>
+			<StyledMemberCard key={parseInt(user.id)}>
 				<HeaderCard>
 					<div>
 						<img
-							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%2334d399&w=70&h=70`}
+							src={`https://avatars.dicebear.com/api/avataaars/${avatarHash}.svg?r=50&m=4&b=%2377b255&w=70&h=70`}
 							alt="randomly generated avatar"
 						></img>
 					</div>
@@ -88,39 +89,36 @@ const GuildListContainer = ({
 					<h5>{user.race}</h5>
 				</CharacterDescription>
 				<CardFooter>
-					<DateJoined>{new Date(user.joined).toLocaleDateString("en-US")}</DateJoined>
-					<DeleteEditBtn>
-						<DeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
+					<DateJoinedText>{new Date(user.joined).toLocaleDateString("en-US")}</DateJoinedText>
+					<StyledDeleteEditBtn>
+						<StyledDeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
 							Delete
-						</DeleteBtn>
-						<Link to="/editmember">
-							<EditBtn
-								data-id={user.id}
-								data-username={user.username}
-								data-rank={user.rank}
-								data-class={user.classname}
-								data-race={user.race}
-								onClick={(e) => handleEditClick(e)}
-								className="guild-btn"
-							>
-								Edit
-							</EditBtn>
-						</Link>
-					</DeleteEditBtn>
-					<FooterIcon>
+						</StyledDeleteBtn>
+						<button
+							data-id={user.id}
+							data-username={user.username}
+							data-rank={user.rank}
+							data-class={user.classname}
+							data-race={user.race}
+							onClick={(e) => handleEditClick(e)}
+						>
+							<Link to="/editmember">Edit</Link>
+						</button>
+					</StyledDeleteEditBtn>
+					<FooterIcons>
 						<i className="fas fa-plus-circle healer"></i>
 						<i className="fas fa-shield-alt tank"></i>
 						<i className="fas fa-khanda dps"></i>
-					</FooterIcon>
+					</FooterIcons>
 				</CardFooter>
-			</MemberCard>
+			</StyledMemberCard>
 		);
 	});
 
 	return (
-		<MemberFormUi>
+		<StyledRosterPageContainer>
 			<GuildPage>
-				<GuildIntroduction>
+				<GuildIntroductionText>
 					<h1>Guild Roster</h1>
 					<p>
 						Founded in 2021, this is a guild roster app that allows users to see members from
@@ -129,60 +127,68 @@ const GuildListContainer = ({
 						personal project for learning purposes and is not accepting contributions. You are
 						welcome to modify and distribute any versions as you please. 🦕
 					</p>
-					<StyledApplyNowContainer>
-						<h1>Ready for an adventure?</h1>
-						<p>If you want to make WOW history, join us on the road to world first.</p>
-						<Link to="/signup">
-							<StyledApplyNowButton>
-								<Link to="/signup">Apply Now ➡</Link>{" "}
-							</StyledApplyNowButton>
-						</Link>
-					</StyledApplyNowContainer>
-				</GuildIntroduction>
+				</GuildIntroductionText>
+				<StyledApplyNowContainer>
+					<h1>Ready for an adventure?</h1>
+					<p>If you want to make WOW history, join us on the road world first.</p>
+					<StyledApplyNowButton>
+						<Link to="/signup">Apply Now ➡</Link>
+					</StyledApplyNowButton>
+				</StyledApplyNowContainer>
+				<StyledMemberText>
+					<span>Guild Members</span>
+				</StyledMemberText>
 				<StyledSearchbar>
 					<input
 						className="guild-search"
 						type="text"
-						placeholder="Search"
+						placeholder="Search guild member"
 						value={term}
 						onChange={(e) => setTerm(e.target.value)}
 					/>
 				</StyledSearchbar>
 				<GuildCardContainer>
-					{renderedList[0] ? mappedList : <Response>No users were found</Response>}
+					{renderedList[0] ? (
+						mappedList
+					) : (
+						<RenderedNoMemberResponse>No users were found</RenderedNoMemberResponse>
+					)}
 				</GuildCardContainer>
 			</GuildPage>
-		</MemberFormUi>
+		</StyledRosterPageContainer>
 	);
 };
 
 export default GuildListContainer;
 
-const MemberFormUi = styled.div`
+const StyledRosterPageContainer = styled.div`
 	background-color: #111827;
-	min-height: 100%;
-	min-width: 100%;
 `;
 const GuildPage = styled.div`
 	background-color: #e5e7eb;
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 100px;
+	padding-bottom: 50px;
 	width: 55em;
+	height: 100%;
+
+	h1,
+	h2 {
+		font-weight: 700;
+	}
 `;
-const GuildIntroduction = styled.div`
+const GuildIntroductionText = styled.div`
 	color: #36454f;
 	padding-left: 5em;
 	padding-right: 5em;
-	margin-bottom: 5em;
+	width: 100%;
 
 	h1 {
 		font-size: 3.5em;
-		font-weight: 700;
 	}
 	p {
 		font-size: 1.1em;
-		font-weight: 400;
 		line-height: 1.7;
 		padding-bottom: 2.2em;
 	}
@@ -195,18 +201,18 @@ const StyledApplyNowContainer = styled.div`
 	justify-content: center;
 	align-items: flex-start;
 	border-radius: 0.5em;
-	padding: 1em 3.5em;
-
+	padding: 2em 2em;
+	margin: 0px auto 3.5em auto;
 	width: 725px;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
 	h1 {
 		font-size: 2em;
-		padding-bottom: 0.2em;
+		padding-bottom: 0.3em;
 	}
 	p {
 		font-size: 1em;
-		padding-bottom: 1em;
+		font-weight: 400;
+		padding-bottom: 2em;
 	}
 `;
 const StyledApplyNowButton = styled.button`
@@ -219,8 +225,55 @@ const StyledApplyNowButton = styled.button`
 	a {
 		color: #36454f;
 		font-size: 1.1em;
-		font-weight: 400;
+		font-weight: 700;
 		text-decoration: none;
+	}
+`;
+const StyledMemberText = styled.p`
+	color: #36454f;
+	line-height: 0.5;
+	text-align: center;
+	margin-bottom: 3.5em;
+
+	span {
+		color: #36454f;
+		display: inline-block;
+		position: relative;
+	}
+	span:before,
+	span:after {
+		content: "";
+		position: absolute;
+		height: 5px;
+		border-top: 1px solid #36454f;
+		margin-top: 0.2em;
+		width: 19em;
+	}
+	span:before {
+		right: 100%;
+		margin-right: 15px;
+	}
+	span:after {
+		left: 100%;
+		margin-left: 15px;
+	}
+`;
+const StyledSearchbar = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+	width: 100%;
+
+	input {
+		background-color: #d1d5db;
+		color: #36454f;
+		font-size: 1.7em;
+		border: none;
+		outline: none;
+		border-radius: 6px;
+		padding: 10px 20px;
+		width: 20em;
 	}
 `;
 const GuildCardContainer = styled.div`
@@ -229,127 +282,96 @@ const GuildCardContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	row-gap: 7px;
-	column-gap: 7px;
+	gap: 10px;
 	padding: 10px 0px;
-	margin-top: 30px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0px auto;
 	width: 725px;
+	min-height: 100%;
 `;
-const StyledSearchbar = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-
-	input {
-		background-color: #d1d5db;
-		color: #28282b;
-		font-size: 20px;
-		border: none;
-		outline: none;
-		border-radius: 6px;
-		padding: 5px 250px 5px 10px;
-	}
+const RenderedNoMemberResponse = styled.div`
+	height: 100%;
 `;
-const Response = styled.div`
-	height: 600px;
-`;
-const MemberCard = styled.div`
+const StyledMemberCard = styled.div`
 	background-color: #111827;
 	color: #f3f4f6;
 	border: 1px solid #f3f4f6;
-	padding-top: 8px;
-	padding-left: 8px;
+	padding: 10px 10px;
 	width: 350px;
 	height: 200px;
 `;
-const HeaderCard = styled.div`
+const HeaderCard = styled.header`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	gap: 1em;
 
-	h1,
-	h2 {
-		margin-left: 18px;
-	}
 	h1 {
-		font-size: 20px;
-		font-weight: 700;
+		font-size: 1.3em;
 	}
 	h2 {
-		color: #34d399;
-		font-size: 18px;
-		font-weight: 700;
+		color: rgb(119, 178, 85);
+		font-size: 1.2em;
 		padding-bottom: 10px;
 	}
 `;
 const CharacterDescription = styled.div`
+	font-weight: 400;
+
 	h3 {
-		font-size: 12px;
-		font-weight: 400;
+		font-size: 1.1em;
 	}
 	h5 {
-		font-size: 9px;
-		font-weight: 400;
+		font-size: 0.8em;
 	}
 `;
 const CardFooter = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 22px;
+	margin-top: 2em;
 `;
-const DateJoined = styled.p`
-	font-size: 7px;
+const DateJoinedText = styled.p`
+	font-size: 0.7em;
 `;
-const FooterIcon = styled.div`
-	font-size: 12px;
-	margin-right: 5px;
+const FooterIcons = styled.div`
+	font-size: 1.2em;
+	display: flex;
+	gap: 10px;
 
-	i {
-		margin-left: 2px;
-		margin-right: 2px;
-		cursor: pointer;
-	}
 	i:hover {
 		transition: 0.2s ease;
 		transform: scale(1.3);
+		cursor: pointer;
 	}
 `;
-const DeleteEditBtn = styled.div`
+const StyledDeleteEditBtn = styled.div`
+	display: flex;
+	gap: 6px;
 	opacity: 0;
 	transition: opacity 0.35s ease;
+
+	a {
+		color: #111827;
+		text-decoration: none;
+	}
+	button {
+		background-color: rgb(119, 178, 85);
+		color: #111827;
+		font-size: 0.6em;
+		font-weight: 700;
+		border: 1px solid #111827;
+		outline: none;
+		border-radius: 15px;
+		padding: 5px 15px;
+	}
+	button:hover {
+		transition: 0.3s ease;
+		transform: scale(1.2);
+	}
 	&:hover {
 		opacity: 1;
 	}
 `;
-const DeleteBtn = styled.button`
-	background-color: #34d399;
-	font-size: 8px;
-	font-weight: 400;
-	border: 1px solid darkslategray;
-	border-radius: 10px;
-	padding: 2.5px 9px;
-	margin-right: 1.5px;
+const StyledDeleteBtn = styled.button`
 	cursor: pointer;
-	&:hover {
-		transition: 0.2s ease;
-		transform: scale(1.1);
-	}
-`;
-const EditBtn = styled.button`
-	background-color: #34d399;
-	font-size: 8px;
-	font-weight: 400;
-	border: 1px solid darkslategray;
-	border-radius: 10px;
-	padding: 2.5px 9px;
-	margin-left: 1.5px;
-	cursor: pointer;
-	&:hover {
-		transition: 0.2s ease;
-		transform: scale(1.1);
-	}
 `;
