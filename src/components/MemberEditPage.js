@@ -33,12 +33,11 @@ const MemberEditPage = (props) => {
 	return (
 		<EditContainer>
 			<EditMemberh1>Edit Member</EditMemberh1>
-			<EditForm className='edit-input-fields-btn'>
-				<InputLabelFields className='edit-input-fields'>
+			<EditForm>
+				<InputLabelFields>
 					<Label htmlFor='charUsername'>Username</Label>
 					<InputField
 						type='text'
-						id='charUsername'
 						value={props.editUsername}
 						onChange={(e) => props.setEditUsername(e.target.value)}
 						required

@@ -94,16 +94,18 @@ const GuildListContainer = ({
 						<StyledDeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
 							Delete
 						</StyledDeleteBtn>
-						<button
-							data-id={user.id}
-							data-username={user.username}
-							data-rank={user.rank}
-							data-class={user.classname}
-							data-race={user.race}
-							onClick={(e) => handleEditClick(e)}
-						>
-							<Link to="/editmember">Edit</Link>
-						</button>
+						<Link to="/editmember">
+							<button
+								data-id={user.id}
+								data-username={user.username}
+								data-rank={user.rank}
+								data-class={user.classname}
+								data-race={user.race}
+								onClick={(e) => handleEditClick(e)}
+							>
+								Edit
+							</button>
+						</Link>
 					</StyledDeleteEditBtn>
 					<FooterIcons>
 						<i className="fas fa-plus-circle healer"></i>
@@ -365,6 +367,7 @@ const StyledDeleteEditBtn = styled.div`
 		padding: 5px 15px;
 	}
 	button:hover {
+		cursor: pointer;
 		transition: 0.3s ease;
 		transform: scale(1.2);
 	}
