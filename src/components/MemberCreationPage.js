@@ -106,7 +106,7 @@ const AddContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 250px 0px 300px 0px;
+	padding: 200px 0px 300px 0px;
 	height: 100%;
 	width: 100%;
 `;
@@ -118,7 +118,7 @@ const AddForm = styled.div`
 	align-items: flex-start;
 	border: 1px solid #111827;
 	border-radius: 10px;
-	padding: 2em 2.5em;
+	padding: 2em 3em;
 	width: clamp(300px, 40vw, 375px);
 
 	h1 {
@@ -145,7 +145,7 @@ const StyledCreationInputField = styled.input`
 	}
 `;
 const StyledAddSubmitBtn = styled.button`
-	background-color: #a66a89;
+	background-color: rgb(119, 178, 85);
 	color: #121212;
 	border: 1px solid #111827;
 	border-radius: 5px;

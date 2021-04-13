@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { fetchAuthToken } from "../helpers/auth";
-// import LogoutButton from "./LogoutButton";
 
 const MemberLoginPage = ({ auth, setAuth }) => {
 	const [loginUsername, setLoginUsername] = useState("");
@@ -27,35 +26,31 @@ const MemberLoginPage = ({ auth, setAuth }) => {
 	return (
 		<LoginContainer>
 			<LoginForm>
-				<Loginh1>Login</Loginh1>
-				<div className="input-field">
-					<LoginLabel htmlFor="login-email">Username</LoginLabel>
-					<IconTextBox>
-						<i className="far fa-user"></i>
-						<LoginInputField
-							type="text"
-							id="login-email"
-							placeholder="Username"
-							required
-							value={loginUsername}
-							onChange={(e) => setLoginUsername(e.target.value)}
-						/>
-					</IconTextBox>
-				</div>
-				<div className="input-field">
-					<LoginLabel htmlFor="login-password">Password</LoginLabel>
-					<IconTextBox>
-						<i className="fas fa-lock"></i>
-						<LoginInputField
-							type="password"
-							id="login-password"
-							placeholder="Password"
-							required
-							value={loginPassword}
-							onChange={(e) => setLoginPassword(e.target.value)}
-						/>
-					</IconTextBox>
-				</div>
+				<h1>Login</h1>
+				<LoginLabel htmlFor="login-email">Username</LoginLabel>
+				<IconTextBox>
+					<i className="far fa-user"></i>
+					<LoginInputField
+						type="text"
+						id="login-email"
+						placeholder="Username"
+						required
+						value={loginUsername}
+						onChange={(e) => setLoginUsername(e.target.value)}
+					/>
+				</IconTextBox>
+				<LoginLabel htmlFor="login-password">Password</LoginLabel>
+				<IconTextBox>
+					<i className="fas fa-lock"></i>
+					<LoginInputField
+						type="password"
+						id="login-password"
+						placeholder="Password"
+						required
+						value={loginPassword}
+						onChange={(e) => setLoginPassword(e.target.value)}
+					/>
+				</IconTextBox>
 				<PasswordForgetLink>
 					Forgot your{" "}
 					<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
@@ -63,20 +58,19 @@ const MemberLoginPage = ({ auth, setAuth }) => {
 					</a>
 					?
 				</PasswordForgetLink>
-				<LoginFooter>
-					<LoginBtn onClick={handleLoginAuth}>Log In</LoginBtn>
-					{/* <ResponseText>{auth.username ? "you is signed in" : "you is signed out"}</ResponseText> */}
-					<IconText>Or Sign in With </IconText>
-					<FooterIcons>
-						<i className="fab fa-facebook-f facebook"></i>
-						<i className="fab fa-twitter twitter"></i>
-						<i className="fab fa-google google"></i>
-					</FooterIcons>
-					<SignUp>
-						Don't have an account? <Link to="/signup">Sign Up</Link>
-					</SignUp>
-					{/* <button onClick={handleLogout}>logout</button>*/}
-				</LoginFooter>
+				<LoginBtn onClick={handleLoginAuth}>Log In</LoginBtn>
+				<ResponseText>
+					{auth.username ? "You are signed in" : "Incorrect username or password"}
+				</ResponseText>
+				<IconText>Or Sign in With </IconText>
+				<FooterIcons>
+					<i className="fab fa-facebook-f facebook"></i>
+					<i className="fab fa-twitter twitter"></i>
+					<i className="fab fa-google google"></i>
+				</FooterIcons>
+				<SignUp>
+					Don't have an account? <Link to="/signup">Sign Up</Link>
+				</SignUp>
 			</LoginForm>
 		</LoginContainer>
 	);
@@ -87,144 +81,102 @@ export default MemberLoginPage;
 const LoginContainer = styled.div`
 	background-color: #e5e7eb;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100%;
-	min-width: 100%;
-`;
-const LoginForm = styled.div`
-	background-color: #f9fafb;
-	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-radius: 3px;
-	width: 260px;
+	padding: 200px 0px 300px 0px;
+	height: 100%;
+	width: 100%;
+`;
+const LoginForm = styled.div`
+	background-color: #f3f4f6;
+	color: #111827;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	border: 1px solid #111827;
+	border-radius: 10px;
+	padding: 2em 3em;
+	width: clamp(300px, 40vw, 375px);
 
 	a {
 		text-decoration: none;
 	}
-`;
-const Loginh1 = styled.h1`
-	font-size: 20px;
-	font-weight: 700;
-	margin-top: 35px;
-	margin-bottom: 10px;
+	h1 {
+		font-size: 2em;
+		font-weight: 700;
+		align-self: center;
+		margin-bottom: 1em;
+	}
 `;
 const LoginLabel = styled.label`
-	font-size: 8px;
-	font-weight: 400;
-	display: block;
-	margin-top: 18px;
-	margin-bottom: 2px;
+	color: #121212;
+	padding: 1em 0 0.5em 0;
 `;
 const LoginInputField = styled.input`
 	background: transparent;
-	color: #333333;
-	font-size: 10px;
+	font-size: 1em;
 	border: none;
 	outline: none;
-	padding: 3px 65px 0px 7px;
 `;
 const IconTextBox = styled.div`
-	margin: 0 0.125em;
 	display: inline;
 	border: none;
 	outline: none;
-	border-bottom: 1px solid #adadad;
+	border-bottom: 1px solid #333;
+	margin: 0 0.125em;
+	width: 100%;
 	vertical-align: baseline;
 
 	i {
-		font-size: 8px;
 		color: #333333;
+		font-size: 0.8em;
+		padding-right: 0.5em;
 	}
 `;
 const PasswordForgetLink = styled.p`
-	font-size: 7px;
-	margin-left: 17em;
-	margin-top: 5px;
-	margin-bottom: 17px;
-`;
-const LoginFooter = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	font-size: 0.7em;
+	align-self: flex-end;
+	padding-top: 0.8em;
 `;
 const LoginBtn = styled.button`
-	background-image: linear-gradient(
-		to right,
-		#00e9ff,
-		#00d4ff,
-		#00bcff,
-		#00a3ff,
-		#0085ff,
-		#2775ff,
-		#4e60ff,
-		#7244ff,
-		#853cfe,
-		#9731fd,
-		#a722fb,
-		#b700f8
-	);
-	color: #fffae9;
-	font-size: 10px;
-	font-weight: 400;
-	border: none;
-	outline: none;
-	border-radius: 15px;
-	width: 20em;
-	height: 2.4em;
-	transition: background-image 0.3s ease;
+	background-color: rgb(119, 178, 85);
+	color: #121212;
+	border: 1px solid #111827;
+	border-radius: 5px;
+	padding: 0.8em;
+	margin: 1.5em 0;
+	width: 100%;
 	cursor: pointer;
-	&:hover {
-		background-image: linear-gradient(
-			to left,
-			#00e9ff,
-			#00d4ff,
-			#00bcff,
-			#00a3ff,
-			#0085ff,
-			#2775ff,
-			#4e60ff,
-			#7244ff,
-			#853cfe,
-			#9731fd,
-			#a722fb,
-			#b700f8
-		);
-	}
 `;
-// const ResponseText = styled.p`
-// 	font-size: 8px;
-// 	color: red;
-// 	margin-top: 10px;
-// `;
+const ResponseText = styled.p`
+	color: red;
+	font-size: 0.8em;
+	align-self: center;
+	margin-top: 10px;
+`;
 const IconText = styled.p`
-	font-size: 7px;
-	font-weight: 400;
-	margin-top: 20px;
+	font-size: 0.8em;
+	align-self: center;
+	margin: 20px 0 10px 0;
 `;
 const FooterIcons = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-self: center;
+	gap: 10px;
 
 	i {
 		color: #fffae9;
-		margin-top: 7px;
-		margin-left: 2px;
-		margin-right: 2px;
 	}
 	.facebook {
 		background-color: rgb(59, 89, 152);
-		font-size: 12px;
+		font-size: 1.2em;
 		border-radius: 50%;
-		width: 20px;
-		height: 20px;
-		padding-top: 4px;
-		padding-left: 6.4px;
+		width: 1.5em;
+		height: 1.5em;
+		padding: 5px 0px 0px 8px;
 		transition: 0.1s ease-in;
 		cursor: pointer;
 	}
@@ -234,12 +186,11 @@ const FooterIcons = styled.div`
 	}
 	.twitter {
 		background-color: rgb(0, 172, 238);
-		font-size: 10px;
+		font-size: 1.2em;
 		border-radius: 50%;
-		width: 20px;
-		height: 20px;
-		padding-top: 5px;
-		padding-left: 5.3px;
+		width: 1.5em;
+		height: 1.5em;
+		padding: 5px 0px 0px 5px;
 		transition: 0.1s ease-in;
 		cursor: pointer;
 	}
@@ -249,24 +200,22 @@ const FooterIcons = styled.div`
 	}
 	.google {
 		background-color: rgb(219 68 55);
-		font-size: 9.5px;
+		font-size: 1.2em;
 		border-radius: 50%;
-		width: 20px;
-		height: 20px;
-		padding-top: 5.3px;
-		padding-left: 5.6px;
+		width: 1.5em;
+		height: 1.5em;
+		padding: 5px 0px 0px 5px;
 		transition: 0.1s ease-in;
 		cursor: pointer;
 	}
 	.google:hover {
 		background-color: #212529;
-		transform: scale(1.14);
+		transform: scale(1.2);
 	}
 `;
 const SignUp = styled.div`
-	font-size: 7px;
-	font-weight: 400;
+	font-size: 0.8em;
+	align-self: center;
 	padding-top: 15px;
-	margin-top: 15px;
-	margin-bottom: 30px;
+	margin: 1em 0 2em 0;
 `;
