@@ -32,16 +32,16 @@ const Footer = () => {
 						<i className="fab fa-instagram instagram"></i>
 						<i className="fab fa-facebook-f facebook"></i>
 						<i className="fab fa-twitter twitter"></i>
-						<i class="fab fa-pinterest-p pinterest"></i>
+						<i className="fab fa-pinterest-p pinterest"></i>
 					</div>
 					<div className="github-individual">
-						<a href="https://github.com/peterphan20">
+						<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
 							<i className="fab fa-github"></i>
 						</a>
 						<h3>Peter Phan</h3>
 					</div>
 					<div className="github-individual">
-						<a href="https://github.com/anthonybui94">
+						<a href="https://github.com/anthonybui94" target="_blank" rel="noreferrer">
 							<i className="fab fa-github"></i>
 						</a>
 						<h3>Anthony Bui</h3>

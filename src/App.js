@@ -8,7 +8,7 @@ import MemberSignupPage from "./components/MemberSignupPage";
 import MemberLoginPage from "./components/MemberLoginPage";
 import GuildListContainer from "./components/GuildListContainer";
 import NavBar from "./components/NavBar";
-import Footer from './components/Footer'
+import Footer from "./components/Footer";
 
 const App = () => {
 	const [currentSelectedMember, setCurrentSelectedMember] = useState({});
@@ -17,7 +17,7 @@ const App = () => {
 	const [editClassname, setEditClassname] = useState("");
 	const [editRace, setEditRace] = useState("");
 	const [auth, setAuth] = useState({});
-
+	
 	return (
 		<Container>
 			<Router>

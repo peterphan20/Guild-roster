@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { sortByNameAndRank } from "../helpers/sortedList";
 import { fetchMembers, removeMember } from "../helpers/crudMembers";
+import GuildIntroduction from "./GuildIntroduction";
 
 const GuildListContainer = ({
 	setCurrentSelectedMember,
@@ -71,7 +72,7 @@ const GuildListContainer = ({
 	const mappedList = renderedList.map((user) => {
 		const avatarHash = randomBytes(20).toString("hex");
 		return (
-			<StyledMemberCard key={parseInt(user.id)}>
+			<StyledMemberCard key={parseInt(user.id)} rendered>
 				<HeaderCard>
 					<div>
 						<img
@@ -99,7 +100,7 @@ const GuildListContainer = ({
 								data-id={user.id}
 								data-username={user.username}
 								data-rank={user.rank}
-								data-class={user.classname}
+								data-classname={user.classname}
 								data-race={user.race}
 								onClick={(e) => handleEditClick(e)}
 							>
@@ -120,23 +121,7 @@ const GuildListContainer = ({
 	return (
 		<StyledRosterPageContainer>
 			<GuildPage>
-				<GuildIntroductionText>
-					<h1>Guild Roster</h1>
-					<p>
-						Founded in 2021, this is a guild roster app that allows users to see members from
-						particular guilds. The user may enter different search parameters to search for specific
-						members within said guild. The list will be sorted by ranks then usernames. This is a
-						personal project for learning purposes and is not accepting contributions. You are
-						welcome to modify and distribute any versions as you please. 🦕
-					</p>
-				</GuildIntroductionText>
-				<StyledApplyNowContainer>
-					<h1>Ready for an adventure?</h1>
-					<p>If you want to make WOW history, join us on the road world first.</p>
-					<StyledApplyNowButton>
-						<Link to="/signup">Apply Now ➡</Link>
-					</StyledApplyNowButton>
-				</StyledApplyNowContainer>
+				<GuildIntroduction />
 				<StyledMemberText>
 					<span>Guild Members</span>
 				</StyledMemberText>
@@ -174,6 +159,7 @@ const GuildPage = styled.div`
 	padding-bottom: 50px;
 	width: 55em;
 	height: 100%;
+	min-height: 1500px;
 
 	h1,
 	h2 {
@@ -285,13 +271,18 @@ const GuildCardContainer = styled.div`
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 10px;
-	padding: 10px 0px;
 	margin: 0px auto;
 	width: 725px;
 	min-height: 100%;
 `;
 const RenderedNoMemberResponse = styled.div`
-	height: 100%;
+	background-color: #e5e7eb;
+	color: red;
+	font-size: 1em;
+	font-weight: 700;
+	text-align: center;
+	width: 100%;
+	height: 50em;
 `;
 const StyledMemberCard = styled.div`
 	background-color: #111827;

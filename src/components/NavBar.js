@@ -35,6 +35,7 @@ const StyledNav = styled.nav`
 	left: 0;
 	width: 100%;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	z-index: 10;
 
 	&:hover {
 		box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);

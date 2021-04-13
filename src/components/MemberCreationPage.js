@@ -2,12 +2,120 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { postMember } from "../helpers/crudMembers";
+import DropdownComponent from "./DropdownComponent";
 
 const MemberCreationPage = () => {
+	const characterRank = [
+		{
+			title: "Select Rank",
+			value: "Rank",
+		},
+		{
+			title: "Officer",
+			value: "Officer",
+		},
+		{
+			title: "Member",
+			value: "Member",
+		},
+		{
+			title: "Peon",
+			value: "Peon",
+		},
+	];
+	const characterClass = [
+		{
+			title: "Select Class",
+			value: "Class",
+		},
+		{
+			title: "Death Knight",
+			value: "Death Knight",
+		},
+		{
+			title: "Demon Hunter",
+			value: "Demon Hunter",
+		},
+		{
+			title: "Druid",
+			value: "Druid",
+		},
+		{
+			title: "Hunter",
+			value: "Hunter",
+		},
+		{
+			title: "Mage",
+			value: "Mage",
+		},
+		{
+			title: "Monk",
+			value: "Monk",
+		},
+		{
+			title: "Paladin",
+			value: "Paladin",
+		},
+		{
+			title: "Priest",
+			value: "Priest",
+		},
+		{
+			title: "Rogue",
+			value: "Rogue",
+		},
+		{
+			title: "Shaman",
+			value: "Shaman",
+		},
+		{
+			title: "Warlock",
+			value: "Warlock",
+		},
+		{
+			title: "Warrior",
+			value: "Warrior",
+		},
+	];
+	const characterRace = [
+		{
+			title: "Select Race",
+			value: "Race",
+		},
+		{
+			title: "Human",
+			value: "Human",
+		},
+		{
+			title: "Dwarf",
+			value: "Dwarf",
+		},
+		{
+			title: "Night Elf",
+			value: "Night Elf",
+		},
+		{
+			title: "Gnome",
+			value: "Gnome",
+		},
+		{
+			title: "Draenei",
+			value: "Draenei",
+		},
+		{
+			title: "Worgen",
+			value: "Worgen",
+		},
+		{
+			title: "Pandaren",
+			value: "Pandaren",
+		},
+	];
+
 	const [username, setUsername] = useState("");
-	const [rank, setRank] = useState("");
-	const [classname, setClassname] = useState("");
-	const [race, setRace] = useState("");
+	const [rank, setRank] = useState(characterRank[0]);
+	const [classname, setClassname] = useState(characterClass[0]);
+	const [race, setRace] = useState(characterRace[0]);
 	const [success, setSuccess] = useState([]);
 	const [error, setError] = useState({});
 
@@ -27,9 +135,9 @@ const MemberCreationPage = () => {
 		if (Array.isArray(response)) {
 			setSuccess(response);
 			setUsername("");
-			setRank("");
-			setClassname("");
-			setRace("");
+			setRank(characterRank[0]);
+			setClassname(characterClass[0]);
+			setRace(characterRace[0]);
 		} else {
 			setSuccess([]);
 			setError(response);
@@ -45,9 +153,7 @@ const MemberCreationPage = () => {
 						User: {success[0].username}, Rank: {success[0].rank}, Class: {success[0].classname},
 						Race: {success[0].race}
 					</p>
-					<p>
-						Joined: {new Date(success[0].joined).toLocaleDateString("en-us")}
-					</p>
+					<p>Joined: {new Date(success[0].joined).toLocaleDateString("en-us")}</p>
 				</StyledSuccessText>
 			);
 		} else {
@@ -63,29 +169,35 @@ const MemberCreationPage = () => {
 
 	return (
 		<AddContainer>
-			<AddMemberh1>Add Member</AddMemberh1>
 			<AddForm>
-				<InputLabelFields>
-					<Label htmlFor="addCharUsername">Username</Label>
-					<InputField
-						type="text"
-						required
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-					<Label htmlFor="addCharRank">Rank</Label>
-					<InputField type="text" required value={rank} onChange={(e) => setRank(e.target.value)} />
-					<Label htmlFor="addCharClassname">Classname</Label>
-					<InputField
-						type="text"
-						required
-						value={classname}
-						onChange={(e) => setClassname(e.target.value)}
-					/>
-					<Label htmlFor="addCharRace">Race</Label>
-					<InputField type="text" required value={race} onChange={(e) => setRace(e.target.value)} />
-				</InputLabelFields>
-				<AddButton onClick={onAddSubmit}>Submit</AddButton>
+				<h1>Add Member</h1>
+				<StyledCreationLabel htmlFor="addCharUsername">Username</StyledCreationLabel>
+				<StyledCreationInputField
+					type="text"
+					placeholder="Username"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+					required
+				/>
+				<DropdownComponent
+					selected={rank}
+					options={characterRank}
+					onSelectedChange={setRank}
+					label="Rank"
+				/>
+				<DropdownComponent
+					selected={classname}
+					options={characterClass}
+					onSelectedChange={setClassname}
+					label="Class"
+				/>
+				<DropdownComponent
+					selected={race}
+					options={characterRace}
+					onSelectedChange={setRace}
+					label="Race"
+				/>
+				<StyledAddSubmitBtn onClick={onAddSubmit}>Submit</StyledAddSubmitBtn>
 				{renderResponse()}
 			</AddForm>
 		</AddContainer>
@@ -95,86 +207,67 @@ const MemberCreationPage = () => {
 export default MemberCreationPage;
 
 const AddContainer = styled.div`
-	background-color: #63738a;
+	background-color: #e5e7eb;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 100%;
-	min-width: 100%;
-`;
-const AddMemberh1 = styled.h1`
-	background-color: #a66a89;
-	color: #121212;
-	text-align: center;
-	font-weight: 700;
-	font-size: 18px;
-	border-top: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
-	padding: 10px;
-	width: 21%;
+	padding: 250px 0px 300px 0px;
+	height: 100%;
+	width: 100%;
 `;
 const AddForm = styled.div`
+	background-color: #f3f4f6;
+	color: #111827;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: #f2f3f7;
-	border-bottom: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 21%;
-`;
-
-const InputLabelFields = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	align-items: flex-start;
+	border: 1px solid #111827;
+	border-radius: 10px;
+	padding: 2em 2.5em;
+	width: clamp(300px, 40vw, 375px);
+
+	h1 {
+		align-self: center;
+		font-size: 1.5em;
+		font-weight: 700;
+		margin-bottom: 1em;
+	}
 `;
-const Label = styled.label`
+const StyledCreationLabel = styled.label`
 	color: #121212;
-	font-size: 10px;
-	font-weight: 400;
-	margin-top: 5px;
-	margin-bottom: 3px;
+	margin: 10px 0px;
 `;
-const InputField = styled.input`
+const StyledCreationInputField = styled.input`
 	background-color: #dedfe3;
-	color: darkslategray;
-	display: block;
+	color: #111827;
 	border: none;
-	font-size: 12px;
 	border-radius: 3px;
-	padding: 3px 25px 3px 5px;
+	padding: 10px;
+	width: 100%;
+
+	::placeholder {
+		color: #9ca3af;
+	}
 `;
-const AddButton = styled.button`
+const StyledAddSubmitBtn = styled.button`
 	background-color: #a66a89;
 	color: #121212;
-	font-size: 10px;
-	font-weight: 400;
 	border: 1px solid darkslategray;
 	border-radius: 5px;
-	padding: 2.5px 15px;
-	margin-top: 11px;
+	padding: 0.8em;
+	margin: 1.5em 0;
+	width: 100%;
 	cursor: pointer;
 `;
 const StyledSuccessText = styled.div`
 	font-size: 8px;
-	font-weight: 400;
 	text-align: center;
-	padding: 10px 5px 4px 5px;
+	padding: 10px 5px 5px 5px;
 `;
 const FailureText = styled.div`
-	font-size: 8px;
+	font-size: 10px;
 	font-weight: 700;
 	text-align: center;
-	padding: 10px 5px 4px 5px;
+	padding: 10px 5px 5px 5px;
 `;
