@@ -2,116 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { postMember } from "../helpers/crudMembers";
+import { characterRace, characterClass, characterRank } from "../helpers/characterDescription";
 import DropdownComponent from "./DropdownComponent";
 
 const MemberCreationPage = () => {
-	const characterRank = [
-		{
-			title: "Select Rank",
-			value: "Rank",
-		},
-		{
-			title: "Officer",
-			value: "Officer",
-		},
-		{
-			title: "Member",
-			value: "Member",
-		},
-		{
-			title: "Peon",
-			value: "Peon",
-		},
-	];
-	const characterClass = [
-		{
-			title: "Select Class",
-			value: "Class",
-		},
-		{
-			title: "Death Knight",
-			value: "Death Knight",
-		},
-		{
-			title: "Demon Hunter",
-			value: "Demon Hunter",
-		},
-		{
-			title: "Druid",
-			value: "Druid",
-		},
-		{
-			title: "Hunter",
-			value: "Hunter",
-		},
-		{
-			title: "Mage",
-			value: "Mage",
-		},
-		{
-			title: "Monk",
-			value: "Monk",
-		},
-		{
-			title: "Paladin",
-			value: "Paladin",
-		},
-		{
-			title: "Priest",
-			value: "Priest",
-		},
-		{
-			title: "Rogue",
-			value: "Rogue",
-		},
-		{
-			title: "Shaman",
-			value: "Shaman",
-		},
-		{
-			title: "Warlock",
-			value: "Warlock",
-		},
-		{
-			title: "Warrior",
-			value: "Warrior",
-		},
-	];
-	const characterRace = [
-		{
-			title: "Select Race",
-			value: "Race",
-		},
-		{
-			title: "Human",
-			value: "Human",
-		},
-		{
-			title: "Dwarf",
-			value: "Dwarf",
-		},
-		{
-			title: "Night Elf",
-			value: "Night Elf",
-		},
-		{
-			title: "Gnome",
-			value: "Gnome",
-		},
-		{
-			title: "Draenei",
-			value: "Draenei",
-		},
-		{
-			title: "Worgen",
-			value: "Worgen",
-		},
-		{
-			title: "Pandaren",
-			value: "Pandaren",
-		},
-	];
-
 	const [username, setUsername] = useState("");
 	const [rank, setRank] = useState(characterRank[0]);
 	const [classname, setClassname] = useState(characterClass[0]);
@@ -253,9 +147,9 @@ const StyledCreationInputField = styled.input`
 const StyledAddSubmitBtn = styled.button`
 	background-color: #a66a89;
 	color: #121212;
-	border: 1px solid darkslategray;
+	border: 1px solid #111827;
 	border-radius: 5px;
-	padding: 0.8em;
+	padding: 1em;
 	margin: 1.5em 0;
 	width: 100%;
 	cursor: pointer;

@@ -166,57 +166,7 @@ const GuildPage = styled.div`
 		font-weight: 700;
 	}
 `;
-const GuildIntroductionText = styled.div`
-	color: #36454f;
-	padding-left: 5em;
-	padding-right: 5em;
-	width: 100%;
 
-	h1 {
-		font-size: 3.5em;
-	}
-	p {
-		font-size: 1.1em;
-		line-height: 1.7;
-		padding-bottom: 2.2em;
-	}
-`;
-const StyledApplyNowContainer = styled.div`
-	background-color: #111827;
-	color: #f3f4f6;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	border-radius: 0.5em;
-	padding: 2em 2em;
-	margin: 0px auto 3.5em auto;
-	width: 725px;
-
-	h1 {
-		font-size: 2em;
-		padding-bottom: 0.3em;
-	}
-	p {
-		font-size: 1em;
-		font-weight: 400;
-		padding-bottom: 2em;
-	}
-`;
-const StyledApplyNowButton = styled.button`
-	background-color: rgb(119, 178, 85);
-	border: none;
-	outline: none;
-	border-radius: 20px;
-	padding: 10px 20px;
-
-	a {
-		color: #36454f;
-		font-size: 1.1em;
-		font-weight: 700;
-		text-decoration: none;
-	}
-`;
 const StyledMemberText = styled.p`
 	color: #36454f;
 	line-height: 0.5;

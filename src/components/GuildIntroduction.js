@@ -27,6 +27,7 @@ const GuildIntroduction = () => {
 };
 
 export default GuildIntroduction;
+
 const GuildIntroductionText = styled.div`
 	color: #36454f;
 	padding-left: 5em;

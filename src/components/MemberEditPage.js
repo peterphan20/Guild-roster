@@ -1,74 +1,82 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { putMember } from '../helpers/crudMembers';
+import { putMember } from "../helpers/crudMembers";
+import { characterRace, characterClass, characterRank } from "../helpers/characterDescription";
+import DropdownComponent from "./DropdownComponent";
 
-const MemberEditPage = (props) => {
-	const [editResponse, setEditResponse] = useState('');
-	const { memberId } = props.currentSelectedMember;
+const MemberEditPage = ({
+	currentSelectedMember,
+	editUsername,
+	editRank,
+	editClassname,
+	editRace,
+	setEditRank,
+	setEditClassname,
+	setEditRace,
+	setEditUsername,
+	username,
+	password,
+}) => {
+	const [editResponse, setEditResponse] = useState("");
+	const { memberId } = currentSelectedMember;
 
 	const onEditSubmit = async () => {
-		const testToken = localStorage.getItem('jwtToken');
+		const testToken = localStorage.getItem("jwtToken");
 		if (!testToken) {
 			return;
 		}
 		const editMemberObj = {
-			username: props.editUsername,
-			rank: props.editRank,
-			classname: props.editClassname,
-			race: props.editRace,
+			username: editUsername,
+			rank: editRank,
+			classname: editClassname,
+			race: editRace,
 		};
 		const response = await putMember(memberId, editMemberObj, JSON.parse(testToken).token);
-		if (!props.username || !props.password) {
-			setEditResponse('Please Sign In!');
+		if (!username || !password) {
+			setEditResponse("Please Sign In!");
 		} else if (!response.details) {
 			// successful put request
-			setEditResponse('Member successfully edited! ✔️');
+			setEditResponse("Member successfully edited! ✔️");
 		} else {
 			// else not successfull
-			setEditResponse('There was an error, alphanumeric numbers only! 😿');
+			setEditResponse("There was an error, alphanumeric characters only! 😿");
 		}
 	};
 
 	return (
 		<EditContainer>
-			<EditMemberh1>Edit Member</EditMemberh1>
 			<EditForm>
-				<InputLabelFields>
-					<Label htmlFor='charUsername'>Username</Label>
-					<InputField
-						type='text'
-						value={props.editUsername}
-						onChange={(e) => props.setEditUsername(e.target.value)}
-						required
-					/>
-					<Label htmlFor='charRank'>Rank</Label>
-					<InputField
-						type='text'
-						value={props.editRank}
-						onChange={(e) => props.setEditRank(e.target.value)}
-						required
-					/>
-					<Label htmlFor='charClassname'>Classname</Label>
-					<InputField
-						type='text'
-						value={props.editClassname}
-						onChange={(e) => props.setEditClassname(e.target.value)}
-						required
-					/>
-					<Label htmlFor='charRace'>Race</Label>
-					<InputField
-						type='text'
-						value={props.editRace}
-						onChange={(e) => props.setEditRace(e.target.value)}
-						required
-					/>
-				</InputLabelFields>
-				{/* <Link to="/"> */}
-				<AddButton className='edit-btn' onClick={onEditSubmit}>
+				<h1>Edit Member</h1>
+				<StyledUsernameLabel htmlFor="charUsername">Username</StyledUsernameLabel>
+				<StyledUsernameInputField
+					type="text"
+					value={editUsername}
+					onChange={(e) => setEditUsername(e.target.value)}
+					placeholder="Username"
+					required
+				/>
+				<DropdownComponent
+					selected={editRank}
+					options={characterRank}
+					onSelectedChange={setEditRank}
+					label="Rank"
+				/>
+				<DropdownComponent
+					selected={editClassname}
+					options={characterClass}
+					onSelectedChange={setEditClassname}
+					label="Rank"
+				/>
+				<DropdownComponent
+					selected={editRace}
+					options={characterRace}
+					onSelectedChange={setEditRace}
+					label="Rank"
+				/>
+				<AddButton className="edit-btn" onClick={onEditSubmit}>
 					Submit
 				</AddButton>
-				{/* </Link> */}
 				<SuccessText>{editResponse}</SuccessText>
 			</EditForm>
 		</EditContainer>
@@ -78,79 +86,61 @@ const MemberEditPage = (props) => {
 export default MemberEditPage;
 
 const EditContainer = styled.div`
-	background-color: #121212;
-	min-height: 100%;
-	min-width: 100%;
+	background-color: #e5e7eb;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-`;
-const EditMemberh1 = styled.h1`
-	background-color: #a66a89;
-	color: #121212;
-	text-align: center;
-	font-weight: 700;
-	font-size: 18px;
-	border-top: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
-	padding: 10px;
-	width: 21%;
+	padding: 250px 0px 300px 0px;
+	height: 100%;
+	width: 100%;
 `;
 const EditForm = styled.div`
+	background-color: #f3f4f6;
+	color: #111827;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: #f2f3f7;
-	border-bottom: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 21%;
-`;
-const InputLabelFields = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	align-items: flex-start;
+	border: 1px solid #111827;
+	border-radius: 10px;
+	padding: 2em 2.5em;
+	width: clamp(300px, 40vw, 375px);
+
+	h1 {
+		align-self: center;
+		font-size: 1.5em;
+		font-weight: 700;
+		margin-bottom: 1em;
+	}
 `;
-const Label = styled.label`
+const StyledUsernameLabel = styled.label`
 	color: #121212;
-	font-size: 10px;
-	font-weight: 400;
-	margin-top: 5px;
-	margin-bottom: 3px;
+	margin: 10px 0px;
 `;
-const InputField = styled.input`
+const StyledUsernameInputField = styled.input`
 	background-color: #dedfe3;
-	color: darkslategray;
-	display: block;
+	color: #111827;
 	border: none;
-	font-size: 12px;
 	border-radius: 3px;
-	padding: 3px 25px 3px 5px;
+	padding: 10px;
+	width: 100%;
+
+	::placeholder {
+		color: #9ca3af;
+	}
 `;
 const AddButton = styled.button`
 	background-color: #a66a89;
 	color: #121212;
-	font-size: 10px;
-	font-weight: 400;
-	border: 1px solid darkslategray;
+	border: 1px solid #111827;
 	border-radius: 5px;
-	padding: 2.5px 15px;
-	margin-top: 11px;
+	padding: 0.8em;
+	margin: 1.5em 0;
+	width: 100%;
 	cursor: pointer;
 `;
 const SuccessText = styled.div`
 	font-size: 8px;
-	font-weight: 400;
 	text-align: center;
-	padding: 10px 5px 4px 5px;
+	padding: 10px 5px 5px 5px;
 `;

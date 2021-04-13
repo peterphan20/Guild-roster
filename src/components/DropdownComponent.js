@@ -3,7 +3,11 @@ import styled from "styled-components";
 
 const DropdownComponent = ({ options, onSelectedChange, selected, label }) => {
 	const renderedOptions = options.map((option) => {
-		return <option value={option.title}>{option.title}</option>;
+		return (
+			<option value={option.title} key={option.value}>
+				{option.title}
+			</option>
+		);
 	});
 	return (
 		<React.Fragment>
