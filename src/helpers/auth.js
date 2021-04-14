@@ -23,4 +23,3 @@ export const createAuthToken = async (signupUsername, signupPassword) => {
 	const data = await response.json();
 	return data;
 };
-

@@ -28,23 +28,17 @@ const Footer = () => {
 					<p>Terms & Conditions</p>
 				</UsefulLinksSection>
 				<SocialMediaSection>
-					<div className="footer-icons">
-						<i className="fab fa-instagram instagram"></i>
-						<i className="fab fa-facebook-f facebook"></i>
-						<i className="fab fa-twitter twitter"></i>
-						<i className="fab fa-pinterest-p pinterest"></i>
-					</div>
 					<div className="github-individual">
+						<h3>Peter Phan</h3>
 						<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
 							<i className="fab fa-github"></i>
 						</a>
-						<h3>Peter Phan</h3>
 					</div>
 					<div className="github-individual">
+						<h3>Anthony Bui</h3>
 						<a href="https://github.com/anthonybui94" target="_blank" rel="noreferrer">
 							<i className="fab fa-github"></i>
 						</a>
-						<h3>Anthony Bui</h3>
 					</div>
 				</SocialMediaSection>
 			</FooterLinks>
@@ -139,21 +133,22 @@ const UsefulLinksSection = styled.div`
 `;
 const SocialMediaSection = styled.div`
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-
+	gap: 20px;
 	.github-individual {
 		display: flex;
-		gap: 15px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 
 		h3 {
+			display: block;
 			color: #f3f4f6;
-			font-size: 15px;
+			font-size: 1.5em;
 		}
 		i {
-			font-size: 1.2em;
-			padding-bottom: 1em;
+			font-size: 2em;
 		}
 	}
 	.footer-icons {
@@ -165,12 +160,6 @@ const SocialMediaSection = styled.div`
 
 		i {
 			font-size: 1.2em;
-			cursor: pointer;
-			transition: 0.3s ease;
-		}
-		i:hover {
-			color: #f3f4f6;
-			transform: scale(1.1);
 		}
 	}
 `;

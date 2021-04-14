@@ -17,14 +17,15 @@ const App = () => {
 	const [editClassname, setEditClassname] = useState("");
 	const [editRace, setEditRace] = useState("");
 	const [auth, setAuth] = useState({});
-	
+
 	return (
 		<Container>
 			<Router>
-				<NavBar />
+				<NavBar auth={auth} setAuth={setAuth} />
 				<Switch>
 					<Route path="/" exact>
 						<GuildListContainer
+							auth={auth}
 							setCurrentSelectedMember={setCurrentSelectedMember}
 							setEditRank={setEditRank}
 							setEditClassname={setEditClassname}

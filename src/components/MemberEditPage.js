@@ -124,7 +124,6 @@ const StyledUsernameInputField = styled.input`
 	border-radius: 3px;
 	padding: 10px;
 	width: 100%;
-
 `;
 const StyledEditSubmitbtn = styled.button`
 	background-color: rgb(119, 178, 85);

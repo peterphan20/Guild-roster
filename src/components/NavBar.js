@@ -5,7 +5,6 @@ import styled from "styled-components";
 import logo from "../assets/logo192.png";
 
 const NavBar = ({ auth, setAuth }) => {
-	console.log(auth.username)
 	const handleLogout = () => {
 		setAuth({});
 		localStorage.removeItem("jwtToken");
@@ -21,13 +20,13 @@ const NavBar = ({ auth, setAuth }) => {
 			</StyledLogoHeader>
 			<StyledLinkContainer>
 				<Link to="/addmember">Add Member</Link>
-				{auth?.username ? (
+				{!auth.username ? (
 					<>
 						<Link to="/login">Log In</Link>
 						<Link to="/signup">Sign Up</Link>
 					</>
 				) : (
-					<a>logout</a>
+					<LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
 				)}
 			</StyledLinkContainer>
 		</StyledNav>
@@ -54,7 +53,7 @@ const StyledNav = styled.nav`
 	}
 	a {
 		color: #111827;
-		font-size: 20px;
+		font-size: 1.2em;
 		text-decoration: none;
 	}
 `;
@@ -82,5 +81,18 @@ const StyledLinkContainer = styled.div`
 
 	a:hover {
 		color: rgb(119, 178, 85);
+	}
+`;
+const LogoutBtn = styled.button`
+	background-color: transparent;
+	color: #111827;
+	font-size: 1.2em;
+	font-weight: 700;
+	border: none;
+	outline: none;
+
+	&:hover {
+		color: rgb(119, 178, 85);
+		cursor: pointer;
 	}
 `;

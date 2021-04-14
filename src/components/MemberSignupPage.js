@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { createAuthToken } from "../helpers/auth";
 
 const MemberSignupPage = () => {
-	// const [signupName, setSignupName] = useState("");
 	const [signupUsername, setSignupUsername] = useState("");
 	const [signupPassword, setSignupPassword] = useState("");
 	const [signupSuccess, setSignupSuccess] = useState({});
@@ -12,7 +11,6 @@ const MemberSignupPage = () => {
 
 	const handleSignupAuth = async () => {
 		const response = await createAuthToken(signupUsername, signupPassword);
-		console.log(response);
 		if (!Array.isArray(response)) {
 			setSignupSuccess(response);
 		} else {

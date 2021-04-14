@@ -29,4 +29,3 @@ export const sortByNameAndRank = (arr) => {
 	const result = [guildMaster, ...sortedOfficers, ...sortedMembers, ...sortedPeons];
 	return result;
 };
-
