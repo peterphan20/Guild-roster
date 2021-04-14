@@ -20,7 +20,7 @@ const MemberSignupPage = () => {
 
 	const handleResponse = () => {
 		if (signupSuccess.token) {
-			return <p>Account successfully created</p>;
+			return <AccountSuccessText>Account successfully created</AccountSuccessText>;
 		} else {
 			if (!signupFailure) return;
 			return <p>Invalid username or password</p>;
@@ -144,4 +144,7 @@ const Login = styled.div`
 	align-self: center;
 	padding-top: 15px;
 	margin: 1em 0 2em 0;
+`;
+const AccountSuccessText = styled.p`
+	color: #121212;
 `;

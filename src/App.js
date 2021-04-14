@@ -34,10 +34,11 @@ const App = () => {
 						/>
 					</Route>
 					<Route path="/addmember">
-						<MemberCreationPage auth={auth} setAuth={auth} />
+						<MemberCreationPage auth={auth} />
 					</Route>
 					<Route path="/editmember">
 						<MemberEditPage
+							auth={auth}
 							currentSelectedMember={currentSelectedMember}
 							editUsername={editUsername}
 							editRank={editRank}

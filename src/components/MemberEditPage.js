@@ -17,6 +17,7 @@ const MemberEditPage = ({
 	setEditUsername,
 	username,
 	password,
+	auth,
 }) => {
 	const [editResponse, setEditResponse] = useState("");
 	const { memberId } = currentSelectedMember;
@@ -33,7 +34,7 @@ const MemberEditPage = ({
 			race: editRace,
 		};
 		const response = await putMember(memberId, editMemberObj, JSON.parse(testToken).token);
-		if (!username || !password) {
+		if (!auth.username) {
 			setEditResponse("Please Sign In!");
 		} else if (!response.details) {
 			// successful put request
@@ -136,7 +137,7 @@ const StyledEditSubmitbtn = styled.button`
 	cursor: pointer;
 `;
 const SuccessText = styled.div`
-	font-size: 8px;
-	text-align: center;
-	padding: 10px 5px 5px 5px;
+	font-size: 0.8em;
+	align-self: center;
+	padding: 10px 0;
 `;

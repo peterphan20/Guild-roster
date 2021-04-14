@@ -54,7 +54,7 @@ const MemberCreationPage = () => {
 			if (!error.details) return;
 			return (
 				<FailureText>
-					<p>*Sorry, we could not create this member 😿*</p>
+					<p>Sorry, we could not create this member 😿</p>
 					<p>{error.details[0].message}</p>
 				</FailureText>
 			);
@@ -155,13 +155,13 @@ const StyledAddSubmitBtn = styled.button`
 	cursor: pointer;
 `;
 const StyledSuccessText = styled.div`
-	font-size: 8px;
-	text-align: center;
-	padding: 10px 5px 5px 5px;
-`;
-const FailureText = styled.div`
-	font-size: 10px;
+	font-size: 0.6em;
 	font-weight: 700;
 	text-align: center;
-	padding: 10px 5px 5px 5px;
+`;
+const FailureText = styled.div`
+	font-size: 0.7em;
+	font-weight: 700;
+	text-align: center;
+	align-self: center;
 `;
