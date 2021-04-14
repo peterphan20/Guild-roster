@@ -25,11 +25,7 @@ const MemberSignupPage = () => {
 			return <p>Account successfully created</p>;
 		} else {
 			if (!signupFailure) return;
-			return (
-				<div>
-					<p>Invalid username or password</p>
-				</div>
-			);
+			return <p>Invalid username or password</p>;
 		}
 	};
 
@@ -63,12 +59,6 @@ const MemberSignupPage = () => {
 				</IconTextBox>
 				<SignupBtn onClick={handleSignupAuth}>Log In</SignupBtn>
 				<StyledResponseText>{handleResponse()}</StyledResponseText>
-				<IconText>Or sign up with </IconText>
-				<FooterIcons>
-					<i className="fab fa-facebook-f facebook"></i>
-					<i className="fab fa-twitter twitter"></i>
-					<i className="fab fa-google google"></i>
-				</FooterIcons>
 				<Login>
 					Already have an account? <Link to="/login">Login</Link>
 				</Login>
@@ -145,69 +135,11 @@ const SignupBtn = styled.button`
 	width: 100%;
 	cursor: pointer;
 `;
-const StyledResponseText = styled.p`
+const StyledResponseText = styled.div`
 	color: red;
 	font-size: 0.8em;
 	align-self: center;
 	margin-top: 10px;
-`;
-const IconText = styled.p`
-	font-size: 0.8em;
-	align-self: center;
-	margin: 20px 0 10px 0;
-`;
-const FooterIcons = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-self: center;
-	gap: 10px;
-
-	i {
-		color: #fffae9;
-	}
-	.facebook {
-		background-color: rgb(59, 89, 152);
-		font-size: 1.2em;
-		border-radius: 50%;
-		width: 1.5em;
-		height: 1.5em;
-		padding: 5px 0px 0px 8px;
-		transition: 0.1s ease-in;
-		cursor: pointer;
-	}
-	.facebook:hover {
-		background-color: #212529;
-		transform: scale(1.14);
-	}
-	.twitter {
-		background-color: rgb(0, 172, 238);
-		font-size: 1.2em;
-		border-radius: 50%;
-		width: 1.5em;
-		height: 1.5em;
-		padding: 5px 0px 0px 5px;
-		transition: 0.1s ease-in;
-		cursor: pointer;
-	}
-	.twitter:hover {
-		background-color: #212529;
-		transform: scale(1.14);
-	}
-	.google {
-		background-color: rgb(219 68 55);
-		font-size: 1.2em;
-		border-radius: 50%;
-		width: 1.5em;
-		height: 1.5em;
-		padding: 5px 0px 0px 5px;
-		transition: 0.1s ease-in;
-		cursor: pointer;
-	}
-	.google:hover {
-		background-color: #212529;
-		transform: scale(1.2);
-	}
 `;
 const Login = styled.div`
 	font-size: 0.8em;

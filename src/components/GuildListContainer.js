@@ -3,6 +3,7 @@ import { randomBytes } from "crypto";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { tank, healer, dps } from "../helpers/characterRole";
 import { fetchMembers, removeMember } from "../helpers/crudMembers";
 import { sortByNameAndRank } from "../helpers/sortedList";
 import GuildIntroduction from "./GuildIntroduction";
@@ -16,6 +17,7 @@ const GuildListContainer = ({
 }) => {
 	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
+
 	useEffect(() => {
 		fetchMembers(setResults);
 	}, []);
@@ -107,7 +109,11 @@ const GuildListContainer = ({
 							</button>
 						</Link>
 					</StyledDeleteEditBtn>
-					{/* <CharacterRoleCheck results={results} /> */}
+					<FooterIcons>
+						{healer.includes(user.classname) ? <i className="fas fa-plus-circle healer"></i> : null}
+						{tank.includes(user.classname) ? <i className="fas fa-shield-alt tank"></i> : null}
+						{dps.includes(user.classname) ? <i className="fas fa-khanda dps"></i> : null}
+					</FooterIcons>
 				</CardFooter>
 			</StyledMemberCard>
 		);
@@ -271,7 +277,17 @@ const CardFooter = styled.div`
 const DateJoinedText = styled.p`
 	font-size: 0.7em;
 `;
+const FooterIcons = styled.div`
+	font-size: 1.2em;
+	display: flex;
+	gap: 10px;
 
+	i:hover {
+		transition: 0.2s ease;
+		transform: scale(1.3);
+		cursor: pointer;
+	}
+`;
 const StyledDeleteEditBtn = styled.div`
 	display: flex;
 	gap: 6px;

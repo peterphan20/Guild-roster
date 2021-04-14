@@ -14,14 +14,8 @@ const MemberLoginPage = ({ auth, setAuth }) => {
 			return;
 		}
 		localStorage.setItem("jwtToken", JSON.stringify(response));
-		console.log("token is generated");
 		setAuth(response);
 	};
-
-	// const handleLogout = () => {
-	// 	setAuth({});
-	// 	localStorage.removeItem("jwtToken");
-	// };
 
 	return (
 		<LoginContainer>
@@ -51,23 +45,10 @@ const MemberLoginPage = ({ auth, setAuth }) => {
 						onChange={(e) => setLoginPassword(e.target.value)}
 					/>
 				</IconTextBox>
-				<PasswordForgetLink>
-					Forgot your{" "}
-					<a href="https://github.com/peterphan20" target="_blank" rel="noreferrer">
-						password
-					</a>
-					?
-				</PasswordForgetLink>
 				<LoginBtn onClick={handleLoginAuth}>Log In</LoginBtn>
 				<ResponseText>
 					{auth.username ? "You are signed in" : "Incorrect username or password"}
 				</ResponseText>
-				<IconText>Or Sign in With </IconText>
-				<FooterIcons>
-					<i className="fab fa-facebook-f facebook"></i>
-					<i className="fab fa-twitter twitter"></i>
-					<i className="fab fa-google google"></i>
-				</FooterIcons>
 				<SignUp>
 					Don't have an account? <Link to="/signup">Sign Up</Link>
 				</SignUp>
@@ -134,11 +115,7 @@ const IconTextBox = styled.div`
 		padding-right: 0.5em;
 	}
 `;
-const PasswordForgetLink = styled.p`
-	font-size: 0.7em;
-	align-self: flex-end;
-	padding-top: 0.8em;
-`;
+
 const LoginBtn = styled.button`
 	background-color: rgb(119, 178, 85);
 	color: #121212;
@@ -154,64 +131,6 @@ const ResponseText = styled.p`
 	font-size: 0.8em;
 	align-self: center;
 	margin-top: 10px;
-`;
-const IconText = styled.p`
-	font-size: 0.8em;
-	align-self: center;
-	margin: 20px 0 10px 0;
-`;
-const FooterIcons = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-self: center;
-	gap: 10px;
-
-	i {
-		color: #fffae9;
-	}
-	.facebook {
-		background-color: rgb(59, 89, 152);
-		font-size: 1.2em;
-		border-radius: 50%;
-		width: 1.5em;
-		height: 1.5em;
-		padding: 5px 0px 0px 8px;
-		transition: 0.1s ease-in;
-		cursor: pointer;
-	}
-	.facebook:hover {
-		background-color: #212529;
-		transform: scale(1.14);
-	}
-	.twitter {
-		background-color: rgb(0, 172, 238);
-		font-size: 1.2em;
-		border-radius: 50%;
-		width: 1.5em;
-		height: 1.5em;
-		padding: 5px 0px 0px 5px;
-		transition: 0.1s ease-in;
-		cursor: pointer;
-	}
-	.twitter:hover {
-		background-color: #212529;
-		transform: scale(1.14);
-	}
-	.google {
-		background-color: rgb(219 68 55);
-		font-size: 1.2em;
-		border-radius: 50%;
-		width: 1.5em;
-		height: 1.5em;
-		padding: 5px 0px 0px 5px;
-		transition: 0.1s ease-in;
-		cursor: pointer;
-	}
-	.google:hover {
-		background-color: #212529;
-		transform: scale(1.2);
-	}
 `;
 const SignUp = styled.div`
 	font-size: 0.8em;

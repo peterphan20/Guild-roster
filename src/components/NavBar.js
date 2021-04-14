@@ -4,7 +4,13 @@ import styled from "styled-components";
 
 import logo from "../assets/logo192.png";
 
-const NavBar = () => {
+const NavBar = ({ auth, setAuth }) => {
+	console.log(auth.username)
+	const handleLogout = () => {
+		setAuth({});
+		localStorage.removeItem("jwtToken");
+	};
+
 	return (
 		<StyledNav>
 			<StyledLogoHeader>
@@ -15,8 +21,14 @@ const NavBar = () => {
 			</StyledLogoHeader>
 			<StyledLinkContainer>
 				<Link to="/addmember">Add Member</Link>
-				<Link to="/login">Log In</Link>
-				<Link to="/signup">Sign Up</Link>
+				{auth?.username ? (
+					<>
+						<Link to="/login">Log In</Link>
+						<Link to="/signup">Sign Up</Link>
+					</>
+				) : (
+					<a>logout</a>
+				)}
 			</StyledLinkContainer>
 		</StyledNav>
 	);

@@ -15,7 +15,7 @@ const DropdownComponent = ({ options, onSelectedChange, selected, label }) => {
 			<StyledDropdownSelect
 				key={options.value}
 				value={selected}
-				onChange={(option) => onSelectedChange(option)}
+				onChange={(e) => onSelectedChange(e.target.value)}
 			>
 				{renderedOptions}
 			</StyledDropdownSelect>

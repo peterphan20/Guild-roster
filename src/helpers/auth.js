@@ -24,13 +24,3 @@ export const createAuthToken = async (signupUsername, signupPassword) => {
 	return data;
 };
 
-export const testAuth = async (token) => {
-	const response = await fetch("https://guildroster.herokuapp.com/auth/jwt/test", {
-		method: "GET",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
-	const data = await response.json();
-	return data;
-};
