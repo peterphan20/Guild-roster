@@ -6,7 +6,7 @@ import { randomBytes } from "crypto";
 import { tank, healer, dps } from "../helpers/characterRole";
 import { sortByNameAndRank } from "../helpers/sortedList";
 
-const RenderGuildMember = ({ results, term, handleClick, handleEditClick }) => {
+const RenderGuildMember = ({ results, term, handleClick, handleEditClick, auth }) => {
 	const renderedList = sortByNameAndRank(results).filter((card) => {
 		if (term === "") {
 			return true;
@@ -43,7 +43,11 @@ const RenderGuildMember = ({ results, term, handleClick, handleEditClick }) => {
 				<CardFooter>
 					<DateJoinedText>{new Date(user.joined).toLocaleDateString("en-US")}</DateJoinedText>
 					<StyledDeleteEditBtn>
-						<StyledDeleteBtn onClick={(e) => handleClick(e.target.id)} id={user.id}>
+						<StyledDeleteBtn
+							onClick={(e) => handleClick(e.target.id)}
+							id={user.id}
+							disabled={auth.username ? "" : "disabled"}
+						>
 							Delete
 						</StyledDeleteBtn>
 						<Link to="/editmember">
@@ -54,6 +58,7 @@ const RenderGuildMember = ({ results, term, handleClick, handleEditClick }) => {
 								data-classname={user.classname}
 								data-race={user.race}
 								onClick={(e) => handleEditClick(e)}
+								disabled={auth.username ? "" : "disabled"}
 							>
 								Edit
 							</button>
@@ -165,6 +170,9 @@ const StyledDeleteEditBtn = styled.div`
 		border-radius: 15px;
 		padding: 5px 15px;
 	}
+	button:disabled {
+		background-color: #6b7280;
+	}
 	button:hover {
 		cursor: pointer;
 		transition: 0.3s ease;
@@ -175,6 +183,9 @@ const StyledDeleteEditBtn = styled.div`
 	}
 `;
 const StyledDeleteBtn = styled.button`
+	&:disabled {
+		background-color: #6b7280;
+	}
 	cursor: pointer;
 `;
 const RenderedNoMemberResponse = styled.div`

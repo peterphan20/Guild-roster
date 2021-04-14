@@ -71,12 +71,15 @@ const GuildListContainer = ({
 						onChange={(e) => setTerm(e.target.value)}
 					/>
 				</StyledSearchbar>
-				<StyledHandleAuthResponse>{auth.username ? "" : "Please Sign In"}</StyledHandleAuthResponse>
+				<StyledHandleAuthResponse>
+					{auth.username ? "" : "Please sign in if you wish to have delete and edit functionality"}
+				</StyledHandleAuthResponse>
 				<RenderGuildMember
 					results={results}
 					term={term}
 					handleClick={handleClick}
 					handleEditClick={handleEditClick}
+					auth={auth}
 				></RenderGuildMember>
 			</GuildPage>
 		</StyledRosterPageContainer>
@@ -152,7 +155,7 @@ const StyledSearchbar = styled.div`
 	}
 `;
 const StyledHandleAuthResponse = styled.div`
-	color: red;
+	font-weight: 700;
 	text-align: center;
 	margin-bottom: 2em;
 `;
