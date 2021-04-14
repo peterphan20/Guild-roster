@@ -40,6 +40,16 @@ const Footer = () => {
 							<i className="fab fa-github"></i>
 						</a>
 					</div>
+					<div className="github-individual">
+						<h3>Guild Roster API</h3>
+						<a
+							href="https://github.com/Personal-Library/api-guildroster"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<i className="fab fa-github"></i>
+						</a>
+					</div>
 				</SocialMediaSection>
 			</FooterLinks>
 		</StyledFooter>
@@ -96,7 +106,7 @@ const FooterLinks = styled.div`
 	align-items: center;
 	gap: 50px;
 	width: 100%;
-	height: 400px;
+	height: 25em;
 `;
 const AboutUsSection = styled.div`
 	display: flex;
@@ -143,9 +153,8 @@ const SocialMediaSection = styled.div`
 		align-items: center;
 
 		h3 {
-			display: block;
 			color: #f3f4f6;
-			font-size: 1.5em;
+			font-size: 1.1em;
 		}
 		i {
 			font-size: 2em;
