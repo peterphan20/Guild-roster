@@ -20,9 +20,9 @@ const MemberCreationPage = () => {
 		}
 		const memberObj = JSON.stringify({
 			username: username,
-			rank: rank,
-			classname: classname,
-			race: race,
+			rank,
+			classname,
+			race,
 		});
 		const response = await postMember(memberObj, JSON.parse(testToken).token);
 

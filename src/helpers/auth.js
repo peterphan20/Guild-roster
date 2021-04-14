@@ -1,5 +1,3 @@
-const CONTENT_TYPE_JSON = { "Content-Type": "application/json; charset=UTF-8" };
-
 export const fetchAuthToken = async (username, password) => {
 	const response = await fetch("https://guildroster.herokuapp.com/auth/jwt/login", {
 		method: "POST",
@@ -7,22 +5,20 @@ export const fetchAuthToken = async (username, password) => {
 			username: username,
 			password: password,
 		}),
-		headers: CONTENT_TYPE_JSON,
+		headers: { "Content-Type": "application/json; charset=UTF-8" },
 	});
 	const data = await response.json();
 	return data;
 };
 
-export const createAuthToken = async (name, username, password) => {
-	const response = await fetch("https://api-guildroster.herokuapp.com/auth/jwt/signup", {
+export const createAuthToken = async (signupUsername, signupPassword) => {
+	const response = await fetch("https://guildroster.herokuapp.com/auth/jwt/signup", {
 		method: "POST",
 		body: JSON.stringify({
-			name: name,
-			username: username,
-			password,
-			password,
+			username: signupUsername,
+			password: signupPassword,
 		}),
-		headers: CONTENT_TYPE_JSON,
+		headers: { "Content-Type": "application/json; charset=UTF-8" },
 	});
 	const data = await response.json();
 	return data;

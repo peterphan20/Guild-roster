@@ -4,7 +4,7 @@ import styled from "styled-components";
 const DropdownComponent = ({ options, onSelectedChange, selected, label }) => {
 	const renderedOptions = options.map((option) => {
 		return (
-			<option value={option.title} key={option.value}>
+			<option value={option.value} key={option.value}>
 				{option.title}
 			</option>
 		);
@@ -14,8 +14,8 @@ const DropdownComponent = ({ options, onSelectedChange, selected, label }) => {
 			<StyledDropdownLabel htmlFor={label}>{label}</StyledDropdownLabel>
 			<StyledDropdownSelect
 				key={options.value}
-				value={selected.value}
-				onChange={(e) => onSelectedChange(e)}
+				value={selected}
+				onChange={(option) => onSelectedChange(option)}
 			>
 				{renderedOptions}
 			</StyledDropdownSelect>

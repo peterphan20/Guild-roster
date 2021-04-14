@@ -4,44 +4,39 @@ import { Link } from "react-router-dom";
 import { createAuthToken } from "../helpers/auth";
 
 const MemberSignupPage = () => {
-	const [signupEmail, setSignupEmail] = useState("");
-	const [signupName, setSignupName] = useState("");
+	// const [signupName, setSignupName] = useState("");
 	const [signupUsername, setSignupUsername] = useState("");
 	const [signupPassword, setSignupPassword] = useState("");
+	const [signupSuccess, setSignupSuccess] = useState({});
+	const [signupFailure, setSignupFailure] = useState([]);
 
 	const handleSignupAuth = async () => {
-		const response = await createAuthToken(signupName, signupUsername, setSignupPassword);
+		const response = await createAuthToken(signupUsername, signupPassword);
 		console.log(response);
+		if (!Array.isArray(response)) {
+			setSignupSuccess(response);
+		} else {
+			setSignupFailure(response);
+		}
+	};
+
+	const handleResponse = () => {
+		if (signupSuccess.token) {
+			return <p>Account successfully created</p>;
+		} else {
+			if (!signupFailure) return;
+			return (
+				<div>
+					<p>Invalid username or password</p>
+				</div>
+			);
+		}
 	};
 
 	return (
 		<SignupContainer>
 			<SignupForm>
 				<h1>Sign Up</h1>
-				<SignupLabel htmlFor="signup-email">Email Address</SignupLabel>
-				<IconTextBox>
-					<i className="fas fa-inbox"></i>
-					<SignupInputField
-						type="email"
-						id="signup-email"
-						placeholder="Email Address"
-						value={signupEmail}
-						onChange={(e) => setSignupEmail(e.target.value)}
-						required
-					/>
-				</IconTextBox>
-				<SignupLabel htmlFor="signup-email">Full Name</SignupLabel>
-				<IconTextBox>
-					<i className="fas fa-user-circle"></i>
-					<SignupInputField
-						type="text"
-						id="signup-email"
-						placeholder="Full Name"
-						value={signupName}
-						onChange={(e) => setSignupName(e.target.value)}
-						required
-					/>
-				</IconTextBox>
 				<SignupLabel htmlFor="signup-username">Username</SignupLabel>
 				<IconTextBox>
 					<i className="far fa-user"></i>
@@ -67,6 +62,7 @@ const MemberSignupPage = () => {
 					/>
 				</IconTextBox>
 				<SignupBtn onClick={handleSignupAuth}>Log In</SignupBtn>
+				<StyledResponseText>{handleResponse()}</StyledResponseText>
 				<IconText>Or sign up with </IconText>
 				<FooterIcons>
 					<i className="fab fa-facebook-f facebook"></i>
@@ -89,7 +85,7 @@ const SignupContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 150px 0px 300px 0px;
+	padding: 200px 0px 300px 0px;
 	height: 100%;
 	width: 100%;
 `;
@@ -149,7 +145,7 @@ const SignupBtn = styled.button`
 	width: 100%;
 	cursor: pointer;
 `;
-const ResponseText = styled.p`
+const StyledResponseText = styled.p`
 	color: red;
 	font-size: 0.8em;
 	align-self: center;

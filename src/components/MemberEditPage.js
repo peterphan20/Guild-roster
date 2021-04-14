@@ -125,9 +125,6 @@ const StyledUsernameInputField = styled.input`
 	padding: 10px;
 	width: 100%;
 
-	::placeholder {
-		color: #9ca3af;
-	}
 `;
 const StyledEditSubmitbtn = styled.button`
 	background-color: rgb(119, 178, 85);

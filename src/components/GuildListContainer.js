@@ -3,8 +3,8 @@ import { randomBytes } from "crypto";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { sortByNameAndRank } from "../helpers/sortedList";
 import { fetchMembers, removeMember } from "../helpers/crudMembers";
+import { sortByNameAndRank } from "../helpers/sortedList";
 import GuildIntroduction from "./GuildIntroduction";
 
 const GuildListContainer = ({
@@ -16,7 +16,6 @@ const GuildListContainer = ({
 }) => {
 	const [term, setTerm] = useState("");
 	const [results, setResults] = useState([]);
-
 	useEffect(() => {
 		fetchMembers(setResults);
 	}, []);
@@ -108,11 +107,7 @@ const GuildListContainer = ({
 							</button>
 						</Link>
 					</StyledDeleteEditBtn>
-					<FooterIcons>
-						<i className="fas fa-plus-circle healer"></i>
-						<i className="fas fa-shield-alt tank"></i>
-						<i className="fas fa-khanda dps"></i>
-					</FooterIcons>
+					{/* <CharacterRoleCheck results={results} /> */}
 				</CardFooter>
 			</StyledMemberCard>
 		);
@@ -276,17 +271,7 @@ const CardFooter = styled.div`
 const DateJoinedText = styled.p`
 	font-size: 0.7em;
 `;
-const FooterIcons = styled.div`
-	font-size: 1.2em;
-	display: flex;
-	gap: 10px;
 
-	i:hover {
-		transition: 0.2s ease;
-		transform: scale(1.3);
-		cursor: pointer;
-	}
-`;
 const StyledDeleteEditBtn = styled.div`
 	display: flex;
 	gap: 6px;
